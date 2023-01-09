@@ -30,14 +30,13 @@ class _MainMenuState extends State<MainMenu> {
               ],
             ),
             Center(
-              child: Icon(
-                  Icons.settings,
-                  color: Colors.black,
-                  size: 32.0,
-                  semanticLabel: 'Text to announce in accessibility modes',
-                ),
+              child: Column(
+                children: [
+                  Image (image: AssetImage('images/test.png'), width: 100,)
+                ],
+              )
             ),
-            Text("data"),
+            Text("MakeDecision"),
             SizedBox(height: 10,),
             Container(
               padding: EdgeInsets.all(20),
@@ -47,63 +46,20 @@ class _MainMenuState extends State<MainMenu> {
               ),
               child: Column(
                 children: [
-                  Text("data"),
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(25)),
-                      color: Colors.white,
+                  Text(
+                    "โปรดเลือกรูปแบบการสุ่ม"
                     ),
-                    child: Column(
-                      children: [
-                        Text("data"),
-                        Icon(
-                          Icons.question_mark_rounded,
-                          color: Colors.black,
-                          size: 32.0,
-                          semanticLabel: 'Text to announce in accessibility modes',
-                        ),
-                      ],
-                    ),
-                  ),
+                  
+                  ButtonMainMenu('สุ่มอัตโนมัติ', 'images/test.png'),
+
                   SizedBox(height: 20,),
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(25)),
-                      color: Colors.white,
-                    ),
-                    child: Column(
-                      children: [
-                        Text("data"),
-                        Icon(
-                          Icons.question_mark_rounded,
-                          color: Colors.black,
-                          size: 32.0,
-                          semanticLabel: 'Text to announce in accessibility modes',
-                        ),
-                      ],
-                    ),
-                  ),
+                  
+                  ButtonMainMenu('หมุนวงล้อ', 'images/test.png'),
+
                   SizedBox(height: 20,),
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(25)),
-                      color: Colors.white,
-                    ),
-                    child: Column(
-                      children: [
-                        Text("data"),
-                        Icon(
-                          Icons.question_mark_rounded,
-                          color: Colors.black,
-                          size: 32.0,
-                          semanticLabel: 'Text to announce in accessibility modes',
-                        ),
-                      ],
-                    ),
-                  ),
+                  
+                  ButtonMainMenu('กินอะไรดี', 'images/test.png')
+
                 ],
               ),
             )
@@ -122,23 +78,40 @@ class ButtonMainMenu extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    AssetImage assetImage = AssetImage(iconName);
+    Image image = Image(image: assetImage, width: 100);
     return Container(
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(25)),
         color: Colors.white,
                     ),
-      child: Column(
-        children: [
-          Text(titleName),
-          Icon(
-            Icons.iconName,
-            color: Colors.black,
-            size: 32.0,
-            semanticLabel: 'Text to announce in accessibility modes',
-          ),
-        ],
-      ),
+      child: Row(
+              children: <Widget> [
+
+                Expanded(
+                  child: Row(
+                    children: [
+                      image
+                    ],
+                  )
+                ),
+
+                Expanded(
+                  child: Text(
+                    titleName,
+                    textDirection: TextDirection.ltr,
+                    style: TextStyle(
+                      decoration: TextDecoration.none,
+                      fontFamily: "Mali",
+                      fontSize: 25,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black
+                    ),
+                  ),
+                )
+              ],
+            ),
     );
   }
 }
