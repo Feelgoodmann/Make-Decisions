@@ -51,7 +51,24 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
+  fonts:
+    - family: FCSound
+      fonts:
+        - asset: assets/fonts/FCSound.ttf
+    - family: Mitr
+      fonts:
+        - asset: assets/fonts/Mitr-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Mitr-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Mitr-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Mitr-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Mitr-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Mitr-Bold.ttf
+          weight: 700
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -91,7 +108,7 @@ flutter:
   #============================================================================
   # image assets
   assets:
-    - images/test.png
+    - assets/images/
 
 
   #============================================================================

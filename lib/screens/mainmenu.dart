@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '/resources/colors.dart';
+import '/resources/text_format.dart';
 
 class MainMenu extends StatefulWidget {
+  const MainMenu({Key? key}) : super(key: key);
+
 
   @override
   State<MainMenu> createState() => _MainMenuState();
@@ -15,7 +19,7 @@ class _MainMenuState extends State<MainMenu> {
     return Scaffold(
       
       body: Container(
-        padding: EdgeInsets.only(left: 30, right: 30, top: 50, bottom: 40),
+        padding: const EdgeInsets.only(left: 30, right: 30, top: 50, bottom: 40),
         child: Column(
           children: [
             Row(
@@ -23,42 +27,42 @@ class _MainMenuState extends State<MainMenu> {
               children: [
                 Icon(
                   Icons.settings,
-                  color: Colors.black,
+                  color: notblack,
                   size: 32.0,
                   semanticLabel: 'Text to announce in accessibility modes',
                 ),
               ],
             ),
+            const SizedBox(height: 30),
             Center(
               child: Column(
-                children: [
-                  Image (image: AssetImage('images/test.png'), width: 100,)
+                children: const [
+                  Image (image: AssetImage('assets/images/logo1.png'), width: 100,)
                 ],
               )
             ),
-            Text("MakeDecision"),
-            SizedBox(height: 10,),
+            headerText("MakeDecision"),
+            const SizedBox(height: 20,),
             Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(25)),
-                color: Colors.grey,
+                borderRadius: const BorderRadius.all(Radius.circular(25)),
+                color: lightgrey,
               ),
               child: Column(
-                children: [
-                  Text(
-                    "โปรดเลือกรูปแบบการสุ่ม"
-                    ),
+                children:  [
+                  normalText("โปรดเลือกรูปแบบการสุ่ม"),
+                  const SizedBox(height: 20),
                   
-                  ButtonMainMenu('สุ่มอัตโนมัติ', 'images/test.png'),
+                  mainMenuButton('สุ่มอัตโนมัติ', 'assets/images/dice1.png'),
 
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20),
                   
-                  ButtonMainMenu('หมุนวงล้อ', 'images/test.png'),
+                  mainMenuButton('หมุนวงล้อ', 'assets/images/wheel4.png'),
 
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20),
                   
-                  ButtonMainMenu('กินอะไรดี', 'images/test.png')
+                  mainMenuButton('กินอะไรดี', 'assets/images/qdish1.png')
 
                 ],
               ),
@@ -66,52 +70,6 @@ class _MainMenuState extends State<MainMenu> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class ButtonMainMenu extends StatelessWidget{
-
-  final String titleName;
-  final String iconName;
-  const ButtonMainMenu(this.titleName,this.iconName);
-
-  @override
-  Widget build(BuildContext context) {
-    AssetImage assetImage = AssetImage(iconName);
-    Image image = Image(image: assetImage, width: 100);
-    return Container(
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(25)),
-        color: Colors.white,
-                    ),
-      child: Row(
-              children: <Widget> [
-
-                Expanded(
-                  child: Row(
-                    children: [
-                      image
-                    ],
-                  )
-                ),
-
-                Expanded(
-                  child: Text(
-                    titleName,
-                    textDirection: TextDirection.ltr,
-                    style: TextStyle(
-                      decoration: TextDecoration.none,
-                      fontFamily: "Mali",
-                      fontSize: 25,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black
-                    ),
-                  ),
-                )
-              ],
-            ),
     );
   }
 }
