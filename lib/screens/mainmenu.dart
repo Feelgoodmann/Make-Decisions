@@ -19,7 +19,7 @@ class _MainMenuState extends State<MainMenu> {
     return Scaffold(
       
       body: Container(
-        padding: const EdgeInsets.only(left: 30, right: 30, top: 50, bottom: 40),
+        padding: const EdgeInsets.only(left: 30, right: 30, top: 35, bottom: 40),
         child: Column(
           children: [
             const SizedBox(height: 30),
@@ -56,7 +56,7 @@ class _MainMenuState extends State<MainMenu> {
                 ],
               ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(height: 30,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
