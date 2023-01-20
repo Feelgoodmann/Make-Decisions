@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '/resources/colors.dart';
-import '/resources/text_format.dart';
-
+import '../resources/textAndButton.dart';
+import '/screens/setting.dart';
 class MainMenu extends StatefulWidget {
   const MainMenu({Key? key}) : super(key: key);
 
@@ -17,9 +16,8 @@ class _MainMenuState extends State<MainMenu> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      
       body: Container(
-        padding: const EdgeInsets.only(left: 30, right: 30, top: 35, bottom: 40),
+        padding: const EdgeInsets.only(left: 30, right: 30, top: 60, bottom: 40),
         child: Column(
           children: [
             const SizedBox(height: 30),
@@ -31,7 +29,7 @@ class _MainMenuState extends State<MainMenu> {
               )
             ),
             headerText("MakeDecision"),
-            const SizedBox(height: 20,),
+            const SizedBox(height: 30,),
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
@@ -56,18 +54,22 @@ class _MainMenuState extends State<MainMenu> {
                 ],
               ),
             ),
-            SizedBox(height: 30,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.settings,
-                  color: notblack,
-                  size: 40.0,
-                  semanticLabel: 'Text to announce in accessibility modes',
+            const SizedBox(height: 30,),
+          IconButton(
+                padding: EdgeInsets.zero,
+                icon: Icon(
+                    Icons.settings,
+                    color: notgrey,
+                    size: 40.0,
+                    semanticLabel: 'Text to announce in accessibility modes',
                 ),
-              ],
-            ),
+                  tooltip: 'Setting',
+                  onPressed: () {
+                    Navigator.push(
+                      context,MaterialPageRoute(builder: (context) => const Setting())
+                      );
+                  }
+            )
           ],
         ),
       ),
