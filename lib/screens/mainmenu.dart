@@ -28,7 +28,7 @@ class _MainMenuState extends State<MainMenu> {
                 Icon(
                   Icons.settings,
                   color: notblack,
-                  size: 32.0,
+                  size: 40.0,
                   semanticLabel: 'Text to announce in accessibility modes',
                 ),
               ],
@@ -54,15 +54,15 @@ class _MainMenuState extends State<MainMenu> {
                   normalText("โปรดเลือกรูปแบบการสุ่ม"),
                   const SizedBox(height: 20),
                   
-                  mainMenuButton('สุ่มอัตโนมัติ', 'assets/images/dice1.png'),
+                  mainMenuButton('สุ่มอัตโนมัติ', 'assets/images/dice2.png'),
 
                   const SizedBox(height: 20),
                   
-                  mainMenuButton('หมุนวงล้อ', 'assets/images/wheel4.png'),
+                  mainMenuButton('หมุนวงล้อ', 'assets/images/wheel5.png'),
 
                   const SizedBox(height: 20),
                   
-                  mainMenuButton('กินอะไรดี', 'assets/images/qdish1.png')
+                  mainMenuButton('กินอะไรดี', 'assets/images/sandwich1.png')
 
                 ],
               ),

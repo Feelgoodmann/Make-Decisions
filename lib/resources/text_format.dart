@@ -25,13 +25,15 @@ Widget mainMenuButton(String text, String asset){
                     ),
       child: Row(
               children: <Widget> [
-                Expanded(
+                const SizedBox(width:30),
+                Container(
                   child: Row(
                     children: [
                       image
                     ],
                   )
                 ),
+                const SizedBox(width: 30),
                 Expanded(
                   child: Text(
                     text,
