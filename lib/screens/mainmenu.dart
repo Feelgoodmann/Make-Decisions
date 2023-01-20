@@ -22,17 +22,6 @@ class _MainMenuState extends State<MainMenu> {
         padding: const EdgeInsets.only(left: 30, right: 30, top: 50, bottom: 40),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Icon(
-                  Icons.settings,
-                  color: notblack,
-                  size: 40.0,
-                  semanticLabel: 'Text to announce in accessibility modes',
-                ),
-              ],
-            ),
             const SizedBox(height: 30),
             Center(
               child: Column(
@@ -66,7 +55,19 @@ class _MainMenuState extends State<MainMenu> {
 
                 ],
               ),
-            )
+            ),
+            SizedBox(height: 20,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.settings,
+                  color: notblack,
+                  size: 40.0,
+                  semanticLabel: 'Text to announce in accessibility modes',
+                ),
+              ],
+            ),
           ],
         ),
       ),
