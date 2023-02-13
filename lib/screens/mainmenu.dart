@@ -17,8 +17,9 @@ class _MainMenuState extends State<MainMenu> {
 
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.only(left: 30, right: 30, top: 60, bottom: 40),
+        padding: const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 40),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             const SizedBox(height: 30),
             Center(
@@ -29,7 +30,6 @@ class _MainMenuState extends State<MainMenu> {
               )
             ),
             headerText("MakeDecision"),
-            const SizedBox(height: 30,),
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
@@ -41,20 +41,19 @@ class _MainMenuState extends State<MainMenu> {
                   normalText("โปรดเลือกรูปแบบการสุ่ม"),
                   const SizedBox(height: 20),
                   
-                  mainMenuButton('สุ่มอัตโนมัติ', 'assets/images/dice2.png'),
+                  mainMenuButton('สุ่มอัตโนมัติ', 'assets/images/dice2.png', context),
 
                   const SizedBox(height: 20),
                   
-                  mainMenuButton('หมุนวงล้อ', 'assets/images/wheel5.png'),
+                  mainMenuButton('หมุนวงล้อ', 'assets/images/wheel5.png', context),
 
                   const SizedBox(height: 20),
                   
-                  mainMenuButton('กินอะไรดี', 'assets/images/sandwich1.png')
+                  mainMenuButton('กินอะไรดี', 'assets/images/sandwich1.png', context),
 
                 ],
               ),
             ),
-            const SizedBox(height: 30,),
           IconButton(
                 padding: EdgeInsets.zero,
                 icon: Icon(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:make_decisions/screens/mainmenu.dart';
+import 'package:make_decisions/screens/randomFood.dart';
 import '../screens/setting.dart';
 import '/resources/colors.dart';
 
@@ -14,12 +16,21 @@ Widget normalText(text){
     const TextStyle(fontSize: 20, fontWeight: FontWeight.w400,fontFamily: "Mitr"),
     );
 }
-
-Widget mainMenuButton(String text, String asset) {
+Widget mainMenuButton(String text, String asset, BuildContext context) {
   AssetImage assetImage = AssetImage(asset);
   Image image = Image(image: assetImage, width: 75);
   return ElevatedButton(
-    onPressed: () {},
+    onPressed: () {
+      if(text == 'สุ่มอัตโนมัติ'){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => MainMenu())); //wwwwwwwwwwwwwwwwwwwwwwwwww
+      }
+      else if(text == 'หมุนวงล้อ'){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => MainMenu())); //wwwwwwwwwwwwwwwwwwwwwwwww
+      }
+      else if(text == 'กินอะไรดี'){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => RandomFoodScreen()));
+      }
+    },
     style: ElevatedButton.styleFrom(
       backgroundColor: Colors.white,
       padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
