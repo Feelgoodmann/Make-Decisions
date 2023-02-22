@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:make_decisions/screens/mainmenu.dart';
 import 'package:make_decisions/screens/randomFood.dart';
+import 'package:make_decisions/screens/spin_bilnd.dart';
 import '../screens/setting.dart';
 import '/resources/colors.dart';
 
@@ -25,7 +26,7 @@ Widget mainMenuButton(String text, String asset, BuildContext context) {
         Navigator.push(context, MaterialPageRoute(builder: (context) => MainMenu())); //wwwwwwwwwwwwwwwwwwwwwwwwww
       }
       else if(text == 'หมุนวงล้อ'){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => MainMenu())); //wwwwwwwwwwwwwwwwwwwwwwwww
+        Navigator.push(context, MaterialPageRoute(builder: (context) => SpinBilndWheel())); //wwwwwwwwwwwwwwwwwwwwwwwww
       }
       else if(text == 'กินอะไรดี'){
         Navigator.push(context, MaterialPageRoute(builder: (context) => RandomFoodScreen()));
