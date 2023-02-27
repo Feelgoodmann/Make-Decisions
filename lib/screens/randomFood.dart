@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 import '../resources/backButton.dart';
+
+int i = 0;
 
 class RandomFoodScreen extends StatefulWidget{
 
@@ -13,6 +16,9 @@ class RandomFoodScreen extends StatefulWidget{
 }
 
 class RandomFoodState extends State<RandomFoodScreen> {
+  late String type;
+  late String imageUrl;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +54,15 @@ class RandomFoodState extends State<RandomFoodScreen> {
                         )
                       ),
                     ),
+                  ),
+                  CarouselSlider.builder(
+                    itemCount: 12, 
+                    options: CarouselOptions(height: 100),
+                    itemBuilder: (context, index, realIndex) {
+                      final urlImage = widget.info[i++].;
+
+                      return buildImage(urlImage, index);
+                    }, 
                   )
                 ],
               )
@@ -78,5 +93,13 @@ class RandomFoodState extends State<RandomFoodScreen> {
       ),
     );
   }
-
+  
+  Widget buildImage(urlImage, int index) {
+    AssetImage assetImage = AssetImage(urlImage);
+  Image image = Image(image: assetImage, width: 75);
+    return Container(
+      margin: EdgeInsets.all(20),
+      child: image,
+    );
+  }
 }
