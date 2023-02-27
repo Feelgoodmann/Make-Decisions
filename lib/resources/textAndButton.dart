@@ -17,6 +17,14 @@ Widget normalText(text){
     const TextStyle(fontSize: 20, fontWeight: FontWeight.w400,fontFamily: "Mitr"),
     );
 }
+
+Widget spinText(text, double size){
+  return Text(text,
+  style:
+    TextStyle(fontSize: size, fontWeight: FontWeight.w400,fontFamily: "Mitr"),
+    );
+}
+
 Widget mainMenuButton(String text, String asset, BuildContext context) {
   AssetImage assetImage = AssetImage(asset);
   Image image = Image(image: assetImage, width: 75);
