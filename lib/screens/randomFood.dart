@@ -4,7 +4,9 @@ import '../resources/backButton.dart';
 
 class RandomFoodScreen extends StatefulWidget{
 
-  const RandomFoodScreen({Key? key}) : super(key: key);
+  final Map<dynamic, dynamic> info;
+
+  const RandomFoodScreen({Key? key, required this.info}) : super(key: key);
   
   @override
   RandomFoodState createState() => RandomFoodState();
@@ -18,11 +20,58 @@ class RandomFoodState extends State<RandomFoodScreen> {
       body: Container(
         padding: EdgeInsets.only(top: 30),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
                 specialBackButton()
               ],
+            ),
+            Container(
+              padding: EdgeInsets.all(25),
+              margin: EdgeInsets.only(top: 20, bottom: 20),
+              decoration: BoxDecoration(
+                color: Colors.black,
+                
+              ),
+              child: Stack(
+                children: [
+                  Center(
+                    child: Container(
+                      height: 120,
+                      width: 120,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: Colors.white,
+                          width: 10
+                        )
+                      ),
+                    ),
+                  )
+                ],
+              )
+            ),
+
+            Container(
+              margin: EdgeInsets.only(left: 110, right: 110, bottom: 20),
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(40),
+                color: Colors.black
+              ),
+              child: Center(
+                child: ElevatedButton(
+                  onPressed: null,
+                  child: Text(
+                    "สุ่มเลย",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                )
+              ),
             ),
           ],
         ),

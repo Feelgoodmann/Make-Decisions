@@ -6,6 +6,7 @@ import 'package:make_decisions/screens/randomFood.dart';
 import 'package:make_decisions/screens/spin_bilnd.dart';
 import '../screens/setting.dart';
 import '/resources/colors.dart';
+import 'foodInfo.dart';
 
 Widget headerText(text) {
   return Text(text,
@@ -31,7 +32,7 @@ Widget mainMenuButton(String text, String asset, BuildContext context) {
         Navigator.push(context, MaterialPageRoute(builder: (context) => SpinBilndWheel())); //wwwwwwwwwwwwwwwwwwwwwwwww
       }
       else if(text == 'กินอะไรดี'){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => RandomFoodScreen()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => FoodResInfo()));
       }
     },
     style: ElevatedButton.styleFrom(
