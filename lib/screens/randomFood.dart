@@ -59,7 +59,7 @@ class RandomFoodState extends State<RandomFoodScreen> {
                     itemCount: 12, 
                     options: CarouselOptions(height: 100),
                     itemBuilder: (context, index, realIndex) {
-                      final urlImage = widget.info[i++].;
+                      final urlImage = widget.info[i++];
 
                       return buildImage(urlImage, index);
                     }, 
