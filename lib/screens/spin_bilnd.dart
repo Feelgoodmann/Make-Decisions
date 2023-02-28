@@ -23,7 +23,7 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
     "BKK",
     "ธนาต"
   ];
-  final bool isAnimating = false;
+  bool isAnimating = false;
   bool? isCheck = false;
 
   void handleRoll() {
@@ -47,6 +47,16 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                   child: Expanded(
                     child: FortuneWheel(
                       animateFirst: false,
+                      onAnimationStart: () {
+                        setState(() {
+                          isAnimating = true;
+                        });
+                      },
+                      onAnimationEnd: () {
+                        setState(() {
+                          isAnimating = false;
+                        });
+                      },
                       selected: selected.stream,
                       indicators: const <FortuneIndicator>[
                         FortuneIndicator(
