@@ -1,24 +1,36 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import '../resources/backButton.dart';
+import 'package:make_decisions/resources/foodInfo.dart';
 
 int i = 0;
 
 class RandomFoodScreen extends StatefulWidget{
 
+  final int num = 1;
   final Map<dynamic, dynamic> info;
+  final List<String> foodImg;
 
-  const RandomFoodScreen({Key? key, required this.info}) : super(key: key);
+  const RandomFoodScreen({Key? key, required this.info, required this.foodImg}) : super(key: key);
   
   @override
-  RandomFoodState createState() => RandomFoodState();
+  State<RandomFoodScreen> createState() => RandomFoodState();
 }
 
 class RandomFoodState extends State<RandomFoodScreen> {
-  late String type;
+  late String typeFood;
   late String imageUrl;
   
+  @override
+  void initState() {
+    super.initState();
+    
+    typeFood = widget.info[widget.num]["typeFood"];
+    imageUrl = widget.info[widget.num]["imageUrl"];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +56,8 @@ class RandomFoodState extends State<RandomFoodScreen> {
                 children: [
                   Center(
                     child: Container(
-                      height: 120,
-                      width: 120,
+                      height: 125,
+                      width: 125,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
@@ -55,15 +67,24 @@ class RandomFoodState extends State<RandomFoodScreen> {
                       ),
                     ),
                   ),
-                  CarouselSlider.builder(
-                    itemCount: 12, 
-                    options: CarouselOptions(height: 100),
-                    itemBuilder: (context, index, realIndex) {
-                      final urlImage = widget.info[i++];
+                  Center(
+                    child: CarouselSlider.builder(
+                      itemCount: 12, 
+                      options: CarouselOptions(
+                        height: 120,
+                        autoPlay: true,
+                        autoPlayAnimationDuration: Duration(seconds: 1),
+                        viewportFraction: 0.35
 
-                      return buildImage(urlImage, index);
-                    }, 
-                  )
+                      ),
+
+                      itemBuilder: (context, index, realIndex) {
+                        final urlImage = widget.foodImg[index];
+
+                        return buildImage(urlImage, index++);
+                      }, 
+                    ),
+                  ), 
                 ],
               )
             ),
@@ -96,9 +117,9 @@ class RandomFoodState extends State<RandomFoodScreen> {
   
   Widget buildImage(urlImage, int index) {
     AssetImage assetImage = AssetImage(urlImage);
-  Image image = Image(image: assetImage, width: 75);
+    Image image = Image(image: assetImage, width: 75);
     return Container(
-      margin: EdgeInsets.all(20),
+      margin: EdgeInsets.symmetric(horizontal: 2),
       child: image,
     );
   }
