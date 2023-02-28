@@ -20,15 +20,19 @@ class AutoRandomState extends State<AutoRandom> {
   int minNumber = 1;
   int maxNumber = 10;
   int randomNumber = 0;
+  int isFirst = 0;
   final bool isAnimating = false;
 
   final _formKey = GlobalKey<FormState>();
   TextEditingController minController = TextEditingController();
   TextEditingController maxController = TextEditingController();
 
-  void handleRandom() {
+  void handleRandom() { 
     if (_formKey.currentState!.validate()) {
       setState(() {
+        AudioPlayer().play(AssetSource('audio/s2s.mp3'));
+        Vibration.vibrate(duration: 200);
+        isFirst = 1;
         minNumber = int.parse(minController.text);
         maxNumber = int.parse(maxController.text);
         randomNumber =
@@ -36,8 +40,10 @@ class AutoRandomState extends State<AutoRandom> {
           minNumber;
       });
     }
-    AudioPlayer().play(AssetSource('audio/s2s.mp3'));
-    Vibration.vibrate(duration: 200);
+   else {
+     AudioPlayer().play(AssetSource('audio/s1.mp3'));
+      Vibration.vibrate(duration: 500);
+   }
   }
   @override
   void dispose() {
@@ -54,9 +60,9 @@ class AutoRandomState extends State<AutoRandom> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: 130),
+                const SizedBox(height: 130),
                 headerText("สุ่มอัตโนมัติ"),
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 30.0),
                   padding: const EdgeInsets.all(20),
@@ -100,7 +106,7 @@ class AutoRandomState extends State<AutoRandom> {
                               ),
                             ),
 
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
 
                             TextFormField(
                               controller: maxController,
@@ -130,20 +136,20 @@ class AutoRandomState extends State<AutoRandom> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 6),
+                            const SizedBox(height: 6),
                             Center(child: normalText('ผลลัพธ์')),
-                            SizedBox(height: 6),
+                            const SizedBox(height: 6),
                             Center(child: Container(
                               width: 120,
                               height: 60,
-                              decoration: BoxDecoration(
-                                borderRadius: const BorderRadius.all(Radius.circular(25)),
+                              decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.all(Radius.circular(25)),
                                 color: Colors.white
                               ),
-                              child: Center(child:Text(((randomNumber == 0) ? "" : randomNumber.toString()),
-                              style: TextStyle(
+                              child: Center(child:Text(((isFirst == 0) ? "" : randomNumber.toString()),
+                              style: const TextStyle(
                                 fontSize:40,color: Colors.blue, fontWeight: FontWeight.w800, fontFamily: "Mitr"))))),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -158,7 +164,7 @@ class AutoRandomState extends State<AutoRandom> {
                     ]
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [specialBackButton()],
