@@ -5,9 +5,11 @@ import '../resources/backButton.dart';
 import '../resources/colors.dart';
 import '../resources/randomButton.dart';
 import '../resources/textAndButton.dart';
+import 'package:vibration/vibration.dart';
+import '/screens/setting.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class AutoRandom extends StatefulWidget{
-
   const AutoRandom({Key? key}) : super(key: key);
   
   @override
@@ -24,13 +26,6 @@ class AutoRandomState extends State<AutoRandom> {
   TextEditingController minController = TextEditingController();
   TextEditingController maxController = TextEditingController();
 
-  @override
-  void dispose() {
-    minController.dispose();
-    maxController.dispose();
-    super.dispose();
-  }
-
   void handleRandom() {
     if (_formKey.currentState!.validate()) {
       setState(() {
@@ -41,7 +36,14 @@ class AutoRandomState extends State<AutoRandom> {
           minNumber;
       });
     }
-    AudioPlayer().play(AssetSource('audio/s1.mp3'));
+    AudioPlayer().play(AssetSource('audio/s2s.mp3'));
+    Vibration.vibrate(duration: 200);
+  }
+  @override
+  void dispose() {
+    minController.dispose();
+    maxController.dispose();
+    super.dispose();
   }
 
   @override
@@ -52,7 +54,7 @@ class AutoRandomState extends State<AutoRandom> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: 100),
+                SizedBox(height: 130),
                 headerText("สุ่มอัตโนมัติ"),
                 SizedBox(height: 20,),
                 Container(
@@ -74,7 +76,7 @@ class AutoRandomState extends State<AutoRandom> {
                               keyboardType: TextInputType.number,
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return 'กรุณากรอกตัวเลข';
+                                  return 'กรุณากรอกเลข';
                                 }
                                   return null;
                                 },
@@ -128,7 +130,20 @@ class AutoRandomState extends State<AutoRandom> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 20),
+                            SizedBox(height: 6),
+                            Center(child: normalText('ผลลัพธ์')),
+                            SizedBox(height: 6),
+                            Center(child: Container(
+                              width: 120,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.all(Radius.circular(25)),
+                                color: Colors.white
+                              ),
+                              child: Center(child:Text(((randomNumber == 0) ? "" : randomNumber.toString()),
+                              style: TextStyle(
+                                fontSize:40,color: Colors.blue, fontWeight: FontWeight.w800, fontFamily: "Mitr"))))),
+                            SizedBox(height: 16),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -137,16 +152,13 @@ class AutoRandomState extends State<AutoRandom> {
                                 ),
                               ]
                             ),
-                            SizedBox(height: 16),
-                            Center(child: Text(((randomNumber == 0) ? "" : randomNumber.toString()),
-                              style: TextStyle(
-                                fontSize:40,color: Colors.blue, fontWeight: FontWeight.w800, fontFamily: "Mitr")))
                         ]
                       )
                       )
                     ]
                   ),
                 ),
+                SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [specialBackButton()],
