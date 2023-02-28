@@ -7,10 +7,10 @@ int roll(int itemCount) {
   return Random().nextInt(itemCount);
 }
 
-class RollButton extends StatelessWidget {
+class RandomButton extends StatelessWidget {
   final VoidCallback? onPressed;
 
-  const RollButton({Key? key,this.onPressed}) : super(key: key);
+  const RandomButton({Key? key,this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class RollButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(35.0),
       ),
       child: ElevatedButton(
-        child: const Text("หมุนเลย!",
+        child: const Text("สุ่มเลย!",
           style: TextStyle(
             fontSize: 30, 
             fontWeight: FontWeight.w400,
