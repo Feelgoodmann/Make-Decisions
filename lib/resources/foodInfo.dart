@@ -17,6 +17,11 @@ class FoodResInfoState extends State<FoodResInfo>{
     "assets/images/food7.png", "assets/images/food8.png", "assets/images/food9.png",
     "assets/images/food10.png", "assets/images/food11.png", "assets/images/food12.png",
     ];
+  var typeOfFood = [
+    "อาหารตามสั่ง", "อาหารเส้น", "ฟาสฟู้ต", "หมูกระทะ",
+    "อาหารริมทาง", "อาหารเพื่อสุขภาพ", "ชาบู", "อาหารอิสาน",
+    "อาหารจีน", "อาหารเกาหลี", "อาหารญี่ปุ่น", "อาหารอินเดีย",
+  ];
   var foodResInfo = {
     1: {
       "typeFood": "อาหารตามสั่ง",
@@ -94,6 +99,6 @@ class FoodResInfoState extends State<FoodResInfo>{
 
   @override
   Widget build(BuildContext context) {
-    return RandomFoodScreen(info: foodResInfo, foodImg: foodImg);
+    return RandomFoodScreen(info: typeOfFood, foodImg: foodImg);
   }
 }

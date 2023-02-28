@@ -1,17 +1,20 @@
-import 'dart:ffi';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:make_decisions/resources/resources.dart';
 
 import '../resources/backButton.dart';
 import 'package:make_decisions/resources/foodInfo.dart';
 
-int i = 0;
+import '../resources/colors.dart';
 
+int i = 0;
+bool randomYet = false;
 class RandomFoodScreen extends StatefulWidget{
 
   final int num = 1;
-  final Map<dynamic, dynamic> info;
+  final List<String> info;
   final List<String> foodImg;
 
   const RandomFoodScreen({Key? key, required this.info, required this.foodImg}) : super(key: key);
@@ -23,38 +26,49 @@ class RandomFoodScreen extends StatefulWidget{
 class RandomFoodState extends State<RandomFoodScreen> {
   late String typeFood;
   late String imageUrl;
+  late int randomNumber = 1;
   
-  @override
-  void initState() {
-    super.initState();
+  // @override
+  // void initState() {
+  //   super.initState();
     
-    typeFood = widget.info[widget.num]["typeFood"];
-    imageUrl = widget.info[widget.num]["imageUrl"];
-  }
+  //   typeFood = widget.info[widget.num]["typeFood"];
+  //   imageUrl = widget.info[widget.num]["imageUrl"];
+  // }
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       body: Container(
         padding: EdgeInsets.only(top: 30),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              children: [
-                specialBackButton()
-              ],
-            ),
+            headerText("กินอะไรดี"),
             Container(
-              padding: EdgeInsets.all(25),
+              padding: EdgeInsets.only(top: 25, bottom: 25),
               margin: EdgeInsets.only(top: 20, bottom: 20),
               decoration: BoxDecoration(
-                color: Colors.black,
+                color: lightgrey,
                 
               ),
               child: Stack(
                 children: [
                   Center(
+                    child: 
+                    Container(
+                      height: 180,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(width: 10.0, color: Colors.white),
+                          bottom: BorderSide(width: 10.0, color: Colors.white),
+                        )
+                      ),
+                      child: Stack(
+                        children: [
+                           Center(
                     child: Container(
                       height: 125,
                       width: 125,
@@ -84,9 +98,29 @@ class RandomFoodState extends State<RandomFoodScreen> {
                         return buildImage(urlImage, index++);
                       }, 
                     ),
-                  ), 
+                  ),
+                        ],
+                      ),
+                    ),
+                  ),
+ 
                 ],
               )
+            ),
+            Container(
+              child: Visibility(
+                visible: randomYet,
+                maintainSize: true, 
+                maintainAnimation: true,
+                maintainState: true,
+                child: Text(
+                  widget.info[randomNumber],
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontFamily: "FCSound"
+                  ),
+                ),
+              ),
             ),
 
             Container(
@@ -94,22 +128,24 @@ class RandomFoodState extends State<RandomFoodScreen> {
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(40),
-                color: Colors.black
               ),
               child: Center(
-                child: ElevatedButton(
+                child: RollButton(
                   onPressed: () {
-                    // CarouselController
+                    setState(() {
+                      randomYet = true;
+                      randomNumber = Random().nextInt(11 - 0 + 1) + 0;
+                      // print(randomNumber);
+                    });
                   },
-                  child: Text(
-                    "สุ่มเลย",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                    ),
-                  ),
+                  name: "สุ่มเลย",
                 )
               ),
+            ),
+            Center(
+              child: (
+                specialBackButton()
+              )
             ),
           ],
         ),
