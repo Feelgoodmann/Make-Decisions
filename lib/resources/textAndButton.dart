@@ -4,9 +4,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:make_decisions/screens/mainmenu.dart';
 import 'package:make_decisions/screens/randomFood.dart';
 import 'package:make_decisions/screens/spin_bilnd.dart';
+import 'package:make_decisions/screens/auto_random.dart';
 import '../screens/setting.dart';
 import '/resources/colors.dart';
 import 'foodInfo.dart';
+
 
 Widget headerText(text) {
   return Text(text,
@@ -18,6 +20,18 @@ Widget normalText(text){
   return Text(text,
   style:
     const TextStyle(fontSize: 20, fontWeight: FontWeight.w400,fontFamily: "Mitr"),
+    );
+}
+Widget buttonText(text){
+  return Text(text,
+  style:
+    const TextStyle(fontSize: 30, fontWeight: FontWeight.w400,fontFamily: "Mitr"),
+    );
+}
+Widget smallText(text){
+  return Text(text,
+  style:
+    const TextStyle(fontSize: 16, fontWeight: FontWeight.w400,fontFamily: "Mitr"),
     );
 }
 
@@ -33,8 +47,8 @@ Widget mainMenuButton(String text, String asset, BuildContext context) {
   Image image = Image(image: assetImage, width: 75);
   return ElevatedButton(
     onPressed: () {
-      if(text == 'สุ่มอัตโนมัติ'){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => MainMenu())); //wwwwwwwwwwwwwwwwwwwwwwwwww
+      if(text == 'สุ่มตัวเลข'){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => AutoRandom())); //wwwwwwwwwwwwwwwwwwwwwwwwww
       }
       else if(text == 'หมุนวงล้อ'){
         Navigator.push(context, MaterialPageRoute(builder: (context) => SpinBilndWheel())); //wwwwwwwwwwwwwwwwwwwwwwwww
@@ -75,30 +89,4 @@ Widget mainMenuButton(String text, String asset, BuildContext context) {
               ],
             ),
   );
-}
-class SwitchSetting extends StatefulWidget {
-  const SwitchSetting({Key? key}) : super(key: key);
-
-  @override
-  State<SwitchSetting> createState() => _SwitchSettingState();
-}
-
-class _SwitchSettingState extends State<SwitchSetting> {
-  bool _enable = true;
-  
-
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoSwitch(
-      // This bool value toggles the switch.
-      value: _enable,
-      activeColor: notgreen,
-      onChanged: (bool value) {
-        // This is called when the user toggles the switch.
-        setState(() {
-          _enable = value;
-        });
-      },
-    );
-  }
 }

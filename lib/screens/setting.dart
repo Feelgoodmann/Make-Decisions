@@ -1,11 +1,13 @@
-// ignore_for_file: prefer_const_constructors
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '/resources/colors.dart';
 import '../resources/textAndButton.dart';
+import '/screens/auto_random.dart';
 
+bool _sound = true;
+bool _vibrate = true;
 class Setting extends StatefulWidget {
   const Setting({Key? key}) : super(key: key);
-
 
   @override
   State<Setting> createState() => _SettingState();
@@ -15,41 +17,54 @@ class _SettingState extends State<Setting> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      
       body: Center(
         child: Container(
           padding: const EdgeInsets.only(left: 30, right: 30),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 250),
               headerText("Setting"),
               const SizedBox(height: 10),
               Container(
+                height: 150,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                  borderRadius: const BorderRadius.all(Radius.circular(25)),
                   color: lightgrey,
                 ),
-                child: SizedBox(
-                  height: 150,
-                  child: ListView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children:  <Widget> [
                       ListTile(
-                          leading: Icon(Icons.music_note_rounded),
+                          leading: const Icon(Icons.music_note_rounded),
                           title: normalText("เสียง"),
-                          trailing : SwitchSetting()
+                          trailing : CupertinoSwitch(
+                            value: _sound,
+                            activeColor: notgreen,
+                            onChanged: (bool isOn) {
+                                setState(() {
+                                  _sound = isOn;
+                                });
+                            },
+                          )
                       ),
                       ListTile(
-                          leading: Icon(Icons.vibration_rounded),
+                          leading: const Icon(Icons.vibration_rounded),
                           title: normalText("การสั่น"),
-                          trailing : SwitchSetting()
+                          trailing : CupertinoSwitch(
+                            value: _vibrate,
+                            activeColor: notgreen,
+                            onChanged: (bool isOn) {
+                                setState(() {
+                                  _vibrate = isOn;
+                                });
+                            },
+                          )
                       ),
                     ],
                   )
-                )
               ),
-              const SizedBox(height: 30,),
+              const SizedBox(height: 30),
               IconButton(
                   padding: EdgeInsets.zero,
                   icon: Icon(

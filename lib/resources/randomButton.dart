@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:make_decisions/resources/textAndButton.dart';
 
@@ -7,16 +6,16 @@ int roll(int itemCount) {
   return Random().nextInt(itemCount);
 }
 
-class RollButton extends StatelessWidget {
+class RandomButton extends StatelessWidget {
   final VoidCallback? onPressed;
 
-  const RollButton({Key? key,this.onPressed}) : super(key: key);
+  const RandomButton({Key? key,this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
@@ -27,7 +26,7 @@ class RollButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(30.0),
       ),
       child: ElevatedButton(
-        child: const Text("หมุนเลย!",
+        child: const Text("สุ่มเลย!",
           style: TextStyle(
             fontSize: 30, 
             fontWeight: FontWeight.w400,

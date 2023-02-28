@@ -17,11 +17,11 @@ class _MainMenuState extends State<MainMenu> {
 
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 40),
+        padding: const EdgeInsets.only(left: 30, right: 30, top: 0, bottom: 40),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const SizedBox(height: 30),
+            const SizedBox(height: 40),
             Center(
               child: Column(
                 children: const [
@@ -41,7 +41,7 @@ class _MainMenuState extends State<MainMenu> {
                   normalText("โปรดเลือกรูปแบบการสุ่ม"),
                   const SizedBox(height: 20),
                   
-                  mainMenuButton('สุ่มอัตโนมัติ', 'assets/images/dice2.png', context),
+                  mainMenuButton('สุ่มตัวเลข', 'assets/images/dice2.png', context),
 
                   const SizedBox(height: 20),
                   
