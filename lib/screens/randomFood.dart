@@ -98,7 +98,9 @@ class RandomFoodState extends State<RandomFoodScreen> {
               ),
               child: Center(
                 child: ElevatedButton(
-                  onPressed: null,
+                  onPressed: () {
+                    // CarouselController
+                  },
                   child: Text(
                     "สุ่มเลย",
                     style: TextStyle(
