@@ -9,6 +9,7 @@ import '../screens/setting.dart';
 import '/resources/colors.dart';
 import 'foodInfo.dart';
 
+
 Widget headerText(text) {
   return Text(text,
   style:
@@ -76,30 +77,4 @@ Widget mainMenuButton(String text, String asset, BuildContext context) {
               ],
             ),
   );
-}
-class SwitchSetting extends StatefulWidget {
-  const SwitchSetting({Key? key}) : super(key: key);
-
-  @override
-  State<SwitchSetting> createState() => _SwitchSettingState();
-}
-
-class _SwitchSettingState extends State<SwitchSetting> {
-  bool _enable = true;
-  
-
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoSwitch(
-      // This bool value toggles the switch.
-      value: _enable,
-      activeColor: notgreen,
-      onChanged: (bool value) {
-        // This is called when the user toggles the switch.
-        setState(() {
-          _enable = value;
-        });
-      },
-    );
-  }
 }
