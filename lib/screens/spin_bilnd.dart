@@ -40,9 +40,10 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                headerText("หมุนวงล้อ"),
                 Container(
-                  height: 340.0,
-                  width: 340.0,
+                  height: 300.0,
+                  width: 300.0,
                   padding: EdgeInsets.all(20.0),
                   child: Expanded(
                     child: FortuneWheel(
@@ -90,7 +91,7 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                                   isCheck = value;
                                 });
                               }),
-                          normalText("สุ่มค่าไม่ซ้ำกัน"),
+                          smallText("สุ่มค่าไม่ซ้ำกัน"),
                         ],
                       ),
                       RollButton(
@@ -129,7 +130,7 @@ Widget ChiocesField() {
                   style: BorderStyle.none,
                 ),
               ),
-              hintText: 'ใส่ตัวเลือก',
+              hintText: 'ตัวเลือกจะแสดงตรงนี้ด้วย',
               fillColor: Colors.white,
               filled: true),
         ),
@@ -148,7 +149,7 @@ Widget ChiocesField() {
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(40)),
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
                     borderSide: BorderSide(
                       width: 0,
                       style: BorderStyle.none,
@@ -171,7 +172,7 @@ Widget ChiocesField() {
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(40)),
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
                     borderSide: BorderSide(
                       width: 0,
                       style: BorderStyle.none,

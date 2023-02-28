@@ -41,7 +41,7 @@ class _MainMenuState extends State<MainMenu> {
                   normalText("โปรดเลือกรูปแบบการสุ่ม"),
                   const SizedBox(height: 20),
                   
-                  mainMenuButton('สุ่มอัตโนมัติ', 'assets/images/dice2.png', context),
+                  mainMenuButton('สุ่มตัวเลข', 'assets/images/dice2.png', context),
 
                   const SizedBox(height: 20),
                   

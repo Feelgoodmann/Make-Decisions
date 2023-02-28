@@ -24,7 +24,7 @@ class RollButton extends StatelessWidget {
             Color(0xff2A5298),
           ]
         ),
-        borderRadius: BorderRadius.circular(35.0),
+        borderRadius: BorderRadius.circular(30.0),
       ),
       child: ElevatedButton(
         child: const Text("หมุนเลย!",

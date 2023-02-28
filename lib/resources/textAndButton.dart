@@ -22,6 +22,18 @@ Widget normalText(text){
     const TextStyle(fontSize: 20, fontWeight: FontWeight.w400,fontFamily: "Mitr"),
     );
 }
+Widget buttonText(text){
+  return Text(text,
+  style:
+    const TextStyle(fontSize: 30, fontWeight: FontWeight.w400,fontFamily: "Mitr"),
+    );
+}
+Widget smallText(text){
+  return Text(text,
+  style:
+    const TextStyle(fontSize: 16, fontWeight: FontWeight.w400,fontFamily: "Mitr"),
+    );
+}
 
 Widget spinText(text, double size){
   return Text(text,
@@ -35,7 +47,7 @@ Widget mainMenuButton(String text, String asset, BuildContext context) {
   Image image = Image(image: assetImage, width: 75);
   return ElevatedButton(
     onPressed: () {
-      if(text == 'สุ่มอัตโนมัติ'){
+      if(text == 'สุ่มตัวเลข'){
         Navigator.push(context, MaterialPageRoute(builder: (context) => AutoRandom())); //wwwwwwwwwwwwwwwwwwwwwwwwww
       }
       else if(text == 'หมุนวงล้อ'){

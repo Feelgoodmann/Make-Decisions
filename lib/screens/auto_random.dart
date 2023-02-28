@@ -7,7 +7,6 @@ import '../resources/randomButton.dart';
 import '../resources/textAndButton.dart';
 import 'package:vibration/vibration.dart';
 import '/screens/setting.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 
 class AutoRandom extends StatefulWidget{
   const AutoRandom({Key? key}) : super(key: key);
@@ -29,9 +28,9 @@ class AutoRandomState extends State<AutoRandom> {
 
   void handleRandom() { 
     if (_formKey.currentState!.validate()) {
+      AudioPlayer().play(AssetSource('audio/s2s.mp3'));
+      Vibration.vibrate(duration: 500);
       setState(() {
-        AudioPlayer().play(AssetSource('audio/s2s.mp3'));
-        Vibration.vibrate(duration: 200);
         isFirst = 1;
         minNumber = int.parse(minController.text);
         maxNumber = int.parse(maxController.text);
@@ -41,7 +40,7 @@ class AutoRandomState extends State<AutoRandom> {
       });
     }
    else {
-     AudioPlayer().play(AssetSource('audio/s1.mp3'));
+      AudioPlayer().play(AssetSource('audio/s1.mp3'));
       Vibration.vibrate(duration: 500);
    }
   }
@@ -61,7 +60,7 @@ class AutoRandomState extends State<AutoRandom> {
             child: Column(
               children: [
                 const SizedBox(height: 130),
-                headerText("สุ่มอัตโนมัติ"),
+                headerText("สุ่มตัวเลข"),
                 const SizedBox(height: 20,),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -137,9 +136,17 @@ class AutoRandomState extends State<AutoRandom> {
                               ),
                             ),
                             const SizedBox(height: 6),
-                            Center(child: normalText('ผลลัพธ์')),
-                            const SizedBox(height: 6),
-                            Center(child: Container(
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                normalText('ผลลัพธ์'),
+                                IconButton(onPressed: null, icon: Icon(Icons.history_rounded, size: 25, color: notblack,))
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Center(child: Container(
                               width: 120,
                               height: 60,
                               decoration: const BoxDecoration(
@@ -148,7 +155,11 @@ class AutoRandomState extends State<AutoRandom> {
                               ),
                               child: Center(child:Text(((isFirst == 0) ? "" : randomNumber.toString()),
                               style: const TextStyle(
-                                fontSize:40,color: Colors.blue, fontWeight: FontWeight.w800, fontFamily: "Mitr"))))),
+                                fontSize:40,color: Colors.blue, fontWeight: FontWeight.w800, fontFamily: "Mitr",
+                                ))))),
+                              ],
+                            ),
+                            
                             const SizedBox(height: 16),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -160,14 +171,16 @@ class AutoRandomState extends State<AutoRandom> {
                             ),
                         ]
                       )
-                      )
+                      ),
                     ]
                   ),
                 ),
                 const SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [specialBackButton()],
+                  children: [
+                    specialBackButton(),
+                    ],
                 ),
               ],
             ),

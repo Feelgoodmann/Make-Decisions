@@ -15,7 +15,7 @@ class RandomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
@@ -23,7 +23,7 @@ class RandomButton extends StatelessWidget {
             Color(0xff2A5298),
           ]
         ),
-        borderRadius: BorderRadius.circular(35.0),
+        borderRadius: BorderRadius.circular(30.0),
       ),
       child: ElevatedButton(
         child: const Text("สุ่มเลย!",
