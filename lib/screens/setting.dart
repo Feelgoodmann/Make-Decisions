@@ -33,7 +33,8 @@ class _SettingState extends State<Setting> {
                 ),
                 child: SizedBox(
                   height: 150,
-                  child: ListView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children:  <Widget> [
                       ListTile(
                           leading: Icon(Icons.music_note_rounded),
