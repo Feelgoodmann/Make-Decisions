@@ -1,13 +1,13 @@
 import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:make_decisions/resources/Images.dart';
 import '../resources/backButton.dart';
 import '../resources/colors.dart';
 import '../resources/randomButton.dart';
 import '../resources/textAndButton.dart';
 import 'package:vibration/vibration.dart';
-import '/screens/setting.dart';
-
+import '/resources/images.dart' as img;
 class AutoRandom extends StatefulWidget{
   const AutoRandom({Key? key}) : super(key: key);
   
@@ -23,8 +23,8 @@ class AutoRandomState extends State<AutoRandom> {
   final bool isAnimating = false;
 
   final _formKey = GlobalKey<FormState>();
-  TextEditingController minController = TextEditingController();
-  TextEditingController maxController = TextEditingController();
+  TextEditingController minController = TextEditingController(text: '1');
+  TextEditingController maxController = TextEditingController(text: '10');
 
   void handleRandom() { 
     if (_formKey.currentState!.validate()) {
@@ -56,12 +56,14 @@ class AutoRandomState extends State<AutoRandom> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          child: SingleChildScrollView(
+
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 130),
+                img.logoImage('assets/images/dice2.png'),
                 headerText("สุ่มตัวเลข"),
                 const SizedBox(height: 20,),
+                //Image.asset('assets/images/dice2.png', width: 100),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 30.0),
                   padding: const EdgeInsets.all(20),
@@ -87,7 +89,7 @@ class AutoRandomState extends State<AutoRandom> {
                                 },
                               decoration: InputDecoration(
                                 prefixIcon: Icon(Icons.start_rounded, color: notgrey,),
-                                labelText: 'สุ่มตัวเลขจาก',
+                                labelText: 'จาก',
                                 labelStyle: TextStyle(color: notblack, fontFamily: "Mitr"),
                                 filled: true,
                                 fillColor: Colors.white,
@@ -118,7 +120,7 @@ class AutoRandomState extends State<AutoRandom> {
                               },
                               decoration: InputDecoration(
                                 prefixIcon: Icon(Icons.stop_rounded, color: notgrey,),
-                                labelText: 'จนถึง',
+                                labelText: 'ถึง',
                                 labelStyle: TextStyle(color: notblack, fontFamily: "Mitr"),
                                 filled: true,
                                 fillColor: Colors.white,
@@ -184,7 +186,6 @@ class AutoRandomState extends State<AutoRandom> {
                 ),
               ],
             ),
-          ),
         ),
       ),
     );

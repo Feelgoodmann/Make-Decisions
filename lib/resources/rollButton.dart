@@ -9,8 +9,9 @@ int roll(int itemCount) {
 
 class RollButton extends StatelessWidget {
   final VoidCallback? onPressed;
+  final String? name;
 
-  const RollButton({Key? key,this.onPressed, required String name}) : super(key: key);
+  const RollButton({Key? key,this.onPressed, this.name}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +25,10 @@ class RollButton extends StatelessWidget {
             Color(0xff2A5298),
           ]
         ),
-        borderRadius: BorderRadius.circular(30.0),
+        borderRadius: BorderRadius.circular(35.0),
       ),
       child: ElevatedButton(
-        child: const Text("หมุนเลย!",
+        child: Text("${name}",
           style: TextStyle(
             fontSize: 30, 
             fontWeight: FontWeight.w400,
