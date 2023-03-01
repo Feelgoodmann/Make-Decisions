@@ -23,7 +23,7 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
     "BKK",
     "ธนาต"
   ];
-  final bool isAnimating = false;
+  bool isAnimating = false;
   bool? isCheck = false;
 
   void handleRoll() {
@@ -39,14 +39,26 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
         child: Container(
           child: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                headerText("หมุนวงล้อ"),
                 Container(
-                  height: 340.0,
-                  width: 340.0,
+                  height: 300.0,
+                  width: 300.0,
                   padding: EdgeInsets.all(20.0),
                   child: Expanded(
                     child: FortuneWheel(
                       animateFirst: false,
+                      onAnimationStart: () {
+                        setState(() {
+                          isAnimating = true;
+                        });
+                      },
+                      onAnimationEnd: () {
+                        setState(() {
+                          isAnimating = false;
+                        });
+                      },
                       selected: selected.stream,
                       indicators: const <FortuneIndicator>[
                         FortuneIndicator(
@@ -90,11 +102,12 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                                   isCheck = value;
                                 });
                               }),
-                          normalText("สุ่มค่าไม่ซ้ำกัน"),
+                          smallText("สุ่มค่าไม่ซ้ำกัน"),
                         ],
                       ),
                       RollButton(
-                        onPressed: isAnimating ? null : handleRoll, name: "หมุนเลย",
+                        onPressed: isAnimating ? null : handleRoll,
+                        name: 'หมุนเลย',
                       ),
                     ],
                   ),
@@ -129,7 +142,7 @@ Widget ChiocesField() {
                   style: BorderStyle.none,
                 ),
               ),
-              hintText: 'ใส่ตัวเลือก',
+              hintText: 'ตัวเลือกจะแสดงตรงนี้ด้วย',
               fillColor: Colors.white,
               filled: true),
         ),
@@ -148,7 +161,7 @@ Widget ChiocesField() {
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(40)),
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
                     borderSide: BorderSide(
                       width: 0,
                       style: BorderStyle.none,
@@ -171,7 +184,7 @@ Widget ChiocesField() {
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(40)),
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
                     borderSide: BorderSide(
                       width: 0,
                       style: BorderStyle.none,

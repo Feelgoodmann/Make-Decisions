@@ -22,6 +22,12 @@ Widget normalText(text){
     const TextStyle(fontSize: 20, fontWeight: FontWeight.w400,fontFamily: "Mitr"),
     );
 }
+Widget smallText(text){
+  return Text(text,
+  style:
+    const TextStyle(fontSize: 16, fontWeight: FontWeight.w400,fontFamily: "Mitr"),
+    );
+}
 
 Widget spinText(text, double size){
   return Text(text,
