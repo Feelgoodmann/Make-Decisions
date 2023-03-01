@@ -10,7 +10,7 @@ int roll(int itemCount) {
 class RollButton extends StatelessWidget {
   final VoidCallback? onPressed;
 
-  const RollButton({Key? key,this.onPressed}) : super(key: key);
+  const RollButton({Key? key,this.onPressed, required String name}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

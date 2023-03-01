@@ -106,6 +106,7 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                       ),
                       RollButton(
                         onPressed: isAnimating ? null : handleRoll,
+                        name: 'หมุนเลย',
                       ),
                     ],
                   ),
