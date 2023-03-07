@@ -10,7 +10,12 @@ import 'package:make_decisions/resources/foodInfo.dart';
 import '../resources/colors.dart';
 
 int i = 0;
+// int timeSpining = 100;
+// int timeChanging = 100;
+int timeSpining = 2000;
+int timeChanging = 1000;
 bool randomYet = false;
+int imgNum = 0;
 class RandomFoodScreen extends StatefulWidget{
 
   final int num = 1;
@@ -27,6 +32,7 @@ class RandomFoodState extends State<RandomFoodScreen> {
   late String typeFood;
   late String imageUrl;
   late int randomNumber = 1;
+  
   
   // @override
   // void initState() {
@@ -45,6 +51,10 @@ class RandomFoodState extends State<RandomFoodScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Image.asset(
+              'assets/images/sandwich1.png',
+              width: 100,
+              ),
             headerText("กินอะไรดี"),
             Container(
               padding: EdgeInsets.only(top: 25, bottom: 25),
@@ -87,14 +97,15 @@ class RandomFoodState extends State<RandomFoodScreen> {
                       options: CarouselOptions(
                         height: 120,
                         autoPlay: true,
-                        autoPlayAnimationDuration: Duration(seconds: 1),
+                        autoPlayInterval: Duration(milliseconds: timeSpining),
+                        autoPlayAnimationDuration: Duration(milliseconds: timeChanging),
                         viewportFraction: 0.35
 
                       ),
 
                       itemBuilder: (context, index, realIndex) {
                         final urlImage = widget.foodImg[index];
-
+                        
                         return buildImage(urlImage, index++);
                       }, 
                     ),
@@ -108,19 +119,22 @@ class RandomFoodState extends State<RandomFoodScreen> {
               )
             ),
             Container(
-              child: Visibility(
-                visible: randomYet,
-                maintainSize: true, 
-                maintainAnimation: true,
-                maintainState: true,
-                child: Text(
-                  widget.info[randomNumber],
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontFamily: "FCSound"
-                  ),
+              child: CarouselSlider.builder(
+                itemCount: 12, 
+                options: CarouselOptions(
+                  height: 120,
+                  autoPlay: !randomYet,
+                  autoPlayInterval: Duration(milliseconds: timeSpining),
+                  autoPlayAnimationDuration: Duration(milliseconds: timeChanging),
                 ),
+
+                itemBuilder: (context, index, realIndex) {
+                  final imgName = widget.info[index];
+                        
+                  return buildText(imgName, index++);
+                }, 
               ),
+
             ),
 
             Container(
@@ -161,4 +175,25 @@ class RandomFoodState extends State<RandomFoodScreen> {
       child: image,
     );
   }
+
+  Widget buildText(imgName, int index) {
+
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 2),
+      child: Visibility(
+                visible: randomYet,
+                maintainSize: true, 
+                maintainAnimation: true,
+                maintainState: true,
+                child: Text(
+                  imgName,
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontFamily: "FCSound"
+                  ),
+                ),
+              ),
+    );
+  }
+  
 }
