@@ -9,20 +9,24 @@ import 'package:make_decisions/resources/foodInfo.dart';
 
 import '../resources/colors.dart';
 
-int i = 0;
 // int timeSpining = 100;
 // int timeChanging = 100;
-int timeSpining = 2000;
-int timeChanging = 1000;
-bool randomYet = false;
-int imgNum = 0;
+
+
 class RandomFoodScreen extends StatefulWidget{
 
+  String buttonName = "สุ่มเลย";
   final int num = 1;
   final List<String> info;
   final List<String> foodImg;
+  late int timeSpining;
+  late int timeChanging;
+  late bool randomYet;
+  late int imgNum;
 
-  const RandomFoodScreen({Key? key, required this.info, required this.foodImg}) : super(key: key);
+  RandomFoodScreen(
+    {Key? key, required this.info, required this.foodImg, required this.timeSpining,
+     required this.timeChanging, required this.randomYet, imgNum}) : super(key: key);
   
   @override
   State<RandomFoodScreen> createState() => RandomFoodState();
@@ -32,7 +36,6 @@ class RandomFoodState extends State<RandomFoodScreen> {
   late String typeFood;
   late String imageUrl;
   late int randomNumber = 1;
-  
   
   // @override
   // void initState() {
@@ -96,9 +99,9 @@ class RandomFoodState extends State<RandomFoodScreen> {
                       itemCount: 12, 
                       options: CarouselOptions(
                         height: 120,
-                        autoPlay: true,
-                        autoPlayInterval: Duration(milliseconds: timeSpining),
-                        autoPlayAnimationDuration: Duration(milliseconds: timeChanging),
+                        autoPlay: !widget.randomYet,
+                        autoPlayInterval: Duration(milliseconds: widget.timeSpining),
+                        autoPlayAnimationDuration: Duration(milliseconds: widget.timeChanging),
                         viewportFraction: 0.35
 
                       ),
@@ -123,9 +126,9 @@ class RandomFoodState extends State<RandomFoodScreen> {
                 itemCount: 12, 
                 options: CarouselOptions(
                   height: 120,
-                  autoPlay: !randomYet,
-                  autoPlayInterval: Duration(milliseconds: timeSpining),
-                  autoPlayAnimationDuration: Duration(milliseconds: timeChanging),
+                  autoPlay: !widget.randomYet,
+                  autoPlayInterval: Duration(milliseconds: widget.timeSpining),
+                  autoPlayAnimationDuration: Duration(milliseconds: widget.timeChanging),
                 ),
 
                 itemBuilder: (context, index, realIndex) {
@@ -146,13 +149,29 @@ class RandomFoodState extends State<RandomFoodScreen> {
               child: Center(
                 child: RollButton(
                   onPressed: () {
-                    setState(() {
-                      randomYet = true;
-                      randomNumber = Random().nextInt(11 - 0 + 1) + 0;
-                      // print(randomNumber);
-                    });
+                    if(!widget.randomYet){if(widget.buttonName == "สุ่มเลย"){
+                      setState(() {
+                        // widget.randomYet = true;
+                        // randomNumber = Random().nextInt(12) + 1;
+
+                        widget.timeSpining = 50;
+                        widget.timeChanging = 100;
+
+                        widget.buttonName = "หยุด!";
+                      });
+                    }
+                    else {
+                      setState(() {
+                        
+                        widget.buttonName = "สุ่มเลย";
+                        widget.randomYet = true;
+                      });
+                    }}
+                    else{
+                      null;
+                    }
                   },
-                  name: "สุ่มเลย",
+                  name: widget.buttonName,
                 )
               ),
             ),
@@ -181,7 +200,7 @@ class RandomFoodState extends State<RandomFoodScreen> {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 2),
       child: Visibility(
-                visible: randomYet,
+                visible: widget.randomYet,
                 maintainSize: true, 
                 maintainAnimation: true,
                 maintainState: true,

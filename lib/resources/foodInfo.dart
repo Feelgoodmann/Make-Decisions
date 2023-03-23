@@ -101,6 +101,6 @@ class FoodResInfoState extends State<FoodResInfo>{
 
   @override
   Widget build(BuildContext context) {
-    return RandomFoodScreen(info: typeOfFood, foodImg: foodImg);
+    return RandomFoodScreen(info: typeOfFood, foodImg: foodImg, timeSpining: 2000, timeChanging: 1000, randomYet: false, imgNum: 0);
   }
 }
