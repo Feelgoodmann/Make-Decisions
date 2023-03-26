@@ -1,13 +1,16 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:make_decisions/resources/resources.dart';
+import 'package:make_decisions/screens/setting.dart';
 
 import '../resources/backButton.dart';
 import 'package:make_decisions/resources/foodInfo.dart';
 
 import '../resources/colors.dart';
+import 'mapScreen.dart';
 
 // int timeSpining = 100;
 // int timeChanging = 100;
@@ -105,6 +108,7 @@ class RandomFoodState extends State<RandomFoodScreen> {
                         viewportFraction: 0.35
 
                       ),
+                      
 
                       itemBuilder: (context, index, realIndex) {
                         final urlImage = widget.foodImg[index];
@@ -149,10 +153,11 @@ class RandomFoodState extends State<RandomFoodScreen> {
               child: Center(
                 child: RollButton(
                   onPressed: () {
-                    if(!widget.randomYet){if(widget.buttonName == "สุ่มเลย"){
+                    if(!widget.randomYet){
+                      if(widget.buttonName == "สุ่มเลย"){
                       setState(() {
                         // widget.randomYet = true;
-                        // randomNumber = Random().nextInt(12) + 1;
+                        randomNumber = Random().nextInt(12) + 1;
 
                         widget.timeSpining = 50;
                         widget.timeChanging = 100;
@@ -160,12 +165,72 @@ class RandomFoodState extends State<RandomFoodScreen> {
                         widget.buttonName = "หยุด!";
                       });
                     }
-                    else {
+                      else {
+                      
                       setState(() {
                         
                         widget.buttonName = "สุ่มเลย";
                         widget.randomYet = true;
                       });
+                      Timer(Duration(milliseconds: 1000), () {
+                        showDialog(
+                          context: context, 
+                          builder: (BuildContext context) {
+                            AssetImage assetImage = AssetImage(widget.foodImg[randomNumber]);
+                            Image image = Image(image: assetImage, width: 100);
+                            return AlertDialog(
+                              content: Container(
+                                height: 200,
+                                child: TextButton(
+                                  onPressed: () {Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => mapScreen())
+                                    );
+                                  },
+                                  child: Container(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                      image,
+                                      Text(
+                                        
+                                        '${widget.info[randomNumber]}',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold
+                                        ),
+                                      ),
+                                    ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              // actions: [
+                              //   Center(
+                              //     child: TextButton(
+                              //       onPressed: () {Navigator.push(
+                              //         context,
+                              //         MaterialPageRoute(builder: (context) => mapScreen())
+                              //         );
+                              //       },
+                              //       child: Text(
+                              //         '${widget.info[randomNumber]}',
+                              //         style: TextStyle(
+                              //           fontSize: 20,
+                              //           color: Colors.black,
+                              //           fontWeight: FontWeight.bold
+                              //         ),
+                              //       ),
+                              //     ),
+                              //   )
+                              // ],
+                            );
+                          }
+                          );
+                       });
+
                     }}
                     else{
                       null;
