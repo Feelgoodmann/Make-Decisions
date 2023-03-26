@@ -28,10 +28,10 @@ Widget buttonText(text){
     const TextStyle(fontSize: 30, fontWeight: FontWeight.w400,fontFamily: "Mitr"),
     );
 }
-Widget smallText(text){
+Widget smallText(text, Color color){
   return Text(text,
   style:
-    const TextStyle(fontSize: 16, fontWeight: FontWeight.w400,fontFamily: "Mitr"),
+      TextStyle(color: color,fontSize: 16, fontWeight: FontWeight.w400,fontFamily: "Mitr"),
     );
 }
 

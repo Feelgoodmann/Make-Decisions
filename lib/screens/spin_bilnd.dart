@@ -101,7 +101,7 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                                   isCheck = value;
                                 });
                               }),
-                          smallText("สุ่มค่าไม่ซ้ำกัน"),
+                          smallText("สุ่มค่าไม่ซ้ำกัน", notblack),
                         ],
                       ),
                       RollButton(
