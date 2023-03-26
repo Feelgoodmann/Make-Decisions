@@ -20,7 +20,52 @@ class AutoRandomState extends State<AutoRandom> {
   int maxNumber = 10;
   int randomNumber = 0;
   int isFirst = 0;
+  List<int> history = [];
   final bool isAnimating = false;
+  Future<void> showHistoryDialog() async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Center(child: buttonText('ประวัติการสุ่ม')),
+          shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(25.0))),
+          content: SizedBox(
+            width: double.maxFinite,
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: history.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  padding: EdgeInsets.only(left: 15),
+                  child: normalText(
+                  '${index + 1}) ${history.reversed.toList()[index]}',
+                  )
+                );
+              },
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: smallText('Clear History', Color.fromARGB(255, 33, 112, 215)),
+              onPressed: () {
+                setState(() {
+                  history.clear();
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: smallText('Close', Color.fromARGB(255, 215, 33, 33)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   final _formKey = GlobalKey<FormState>();
   TextEditingController minController = TextEditingController(text: '1');
@@ -37,12 +82,17 @@ class AutoRandomState extends State<AutoRandom> {
         randomNumber =
           Random().nextInt(maxNumber - minNumber + 1) +
           minNumber;
+        if (history.length == 10) {
+          history.removeAt(0);
+        }
+        history.add(randomNumber);
       });
     }
    else {
       AudioPlayer().play(AssetSource('audio/s1.mp3'));
       Vibration.vibrate(duration: 500);
    }
+
   }
   @override
   void dispose() {
@@ -56,15 +106,19 @@ class AutoRandomState extends State<AutoRandom> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                img.logoImage('assets/images/dice2.png'),
-                headerText("สุ่มตัวเลข"),
-                const SizedBox(height: 20,),
-                //Image.asset('assets/images/dice2.png', width: 100),
-                Container(
+                Column(
+                  children: [
+                    const SizedBox(height: 60,),
+                    img.logoImage('assets/images/dice2.png'),
+                    headerText("สุ่มตัวเลข"),
+                    const SizedBox(height: 20,),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
                   margin: const EdgeInsets.symmetric(horizontal: 30.0),
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
@@ -141,8 +195,7 @@ class AutoRandomState extends State<AutoRandom> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                normalText('ผลลัพธ์'),
-                                IconButton(onPressed: null, icon: Icon(Icons.history_rounded, size: 25, color: notblack,))
+                                normalText('ผลลัพธ์')
                               ],
                             ),
                             Row(
@@ -171,19 +224,37 @@ class AutoRandomState extends State<AutoRandom> {
                                 ),
                               ]
                             ),
-                        ]
+                      ]
                       )
                       ),
                     ]
                   ),
                 ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    specialBackButton(),
-                    ],
+                  ],
                 ),
+                IconButton(
+                  color: history.isEmpty ? lightgrey : notblack,
+                  onPressed: () {
+                    history.isEmpty ? null : showHistoryDialog();
+                  },
+                  icon: Icon(Icons.history_rounded, size: 40)
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(left: 15,bottom: 20),
+                            child: specialBackButton()
+                          )
+                        ],
+                      ),
+                    ],
+                  )
+                )
               ],
             ),
         ),
