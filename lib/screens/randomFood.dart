@@ -157,8 +157,8 @@ class RandomFoodState extends State<RandomFoodScreen> {
                       if(widget.buttonName == "สุ่มเลย"){
                       setState(() {
                         // widget.randomYet = true;
-                        randomNumber = Random().nextInt(12) + 1;
-
+                        randomNumber = Random().nextInt(11);
+                        print(randomNumber);
                         widget.timeSpining = 50;
                         widget.timeChanging = 100;
 
@@ -184,7 +184,7 @@ class RandomFoodState extends State<RandomFoodScreen> {
                                 child: TextButton(
                                   onPressed: () {Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => mapScreen())
+                                    MaterialPageRoute(builder: (context) => MapScreen())
                                     );
                                   },
                                   child: Container(
