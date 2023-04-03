@@ -61,7 +61,7 @@ class RandomFoodState extends State<RandomFoodScreen> {
               'assets/images/sandwich1.png',
               width: 100,
               ),
-            headerText("กินอะไรดี"),
+            headerText("กินอะไรดี", notblack),
             Container(
               padding: EdgeInsets.only(top: 25, bottom: 25),
               margin: EdgeInsets.only(top: 20, bottom: 20),

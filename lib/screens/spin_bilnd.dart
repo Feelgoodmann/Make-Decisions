@@ -40,7 +40,7 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                headerText("หมุนวงล้อ"),
+                headerText("หมุนวงล้อ", notblack),
                 Container(
                   height: 300.0,
                   width: 300.0,
@@ -127,7 +127,7 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
 Widget ChiocesField() {
   return Column(
     children: <Widget>[
-      normalText("เพิ่มตัวเลือกในการสุ่ม"),
+      normalText("เพิ่มตัวเลือกในการสุ่ม", notblack),
       const SizedBox(height: 10.0),
       Container(
         padding: const EdgeInsets.only(right: 10.0, left: 10.0),

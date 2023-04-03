@@ -24,7 +24,7 @@ class _SettingState extends State<Setting> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              headerText("Setting"),
+              headerText("Setting", notblack),
               const SizedBox(height: 10),
               Container(
                 height: 150,
@@ -37,7 +37,7 @@ class _SettingState extends State<Setting> {
                     children:  <Widget> [
                       ListTile(
                           leading: const Icon(Icons.music_note_rounded),
-                          title: normalText("เสียง"),
+                          title: normalText("เสียง", notblack),
                           trailing : CupertinoSwitch(
                             value: _sound,
                             activeColor: notgreen,
@@ -50,7 +50,7 @@ class _SettingState extends State<Setting> {
                       ),
                       ListTile(
                           leading: const Icon(Icons.vibration_rounded),
-                          title: normalText("การสั่น"),
+                          title: normalText("การสั่น", notblack),
                           trailing : CupertinoSwitch(
                             value: _vibrate,
                             activeColor: notgreen,
