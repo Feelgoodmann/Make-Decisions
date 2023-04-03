@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import '../resources/resources.dart';
 
 class SpinBilndWheel extends StatefulWidget {
@@ -15,16 +14,28 @@ class SpinBilndWheel extends StatefulWidget {
 
 class _SpinBilndWheelState extends State<SpinBilndWheel> {
   StreamController<int> selected = StreamController<int>();
-  final List<String> choices = [
+  List<String> choices = [
     "หมูน้อย",
     "ชิวเล้า",
-    "kinn",
-    "On-Son",
-    "BKK",
-    "ธนาต"
   ];
+
+  void updateChoicesList(List<String> newChoices) {
+    setState(() {
+      choices.addAll(newChoices);
+    });
+  }
+
   bool isAnimating = false;
   bool? isCheck = false;
+  final List<Color> colors = [
+    Colors.red,
+    Colors.blue,
+    Colors.green,
+    Colors.brown,
+    Colors.purple,
+    Colors.orange,
+    Colors.blueGrey,
+  ];
 
   void handleRoll() {
     selected.add(
@@ -72,10 +83,13 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                       items: List.generate(choices.length, (index) {
                         return FortuneItem(
                             child: Text(
-                          choices[index],
-                          style: TextStyle(fontSize: 25.0),
-                          textAlign: TextAlign.center,
-                        ));
+                              choices[index],
+                              style: TextStyle(fontSize: 25.0),
+                              textAlign: TextAlign.center,
+                            ),
+                            style: FortuneItemStyle(
+                              color: colors[index % colors.length],
+                            ));
                       }),
                     ),
                   ),
@@ -89,7 +103,7 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                   ),
                   child: Column(
                     children: [
-                      ChiocesField(),
+                      AddChoices(updateChoicesList: updateChoicesList),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -123,123 +137,143 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
   }
 }
 
-Widget ChiocesField() {
-  return Column(
-    children: <Widget>[
-      normalText("เพิ่มตัวเลือกในการสุ่ม"),
-      const SizedBox(height: 10.0),
-      Container(
-        padding: const EdgeInsets.only(right: 10.0, left: 10.0),
-        child: const TextField(
-          maxLines: 4,
-          decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-                borderSide: BorderSide(
-                  width: 0,
-                  style: BorderStyle.none,
-                ),
-              ),
-              hintText: 'ตัวเลือกจะแสดงตรงนี้ด้วย',
-              fillColor: Colors.white,
-              filled: true),
-        ),
-      ),
-      const SizedBox(height: 10.0),
-      Row(
-        children: [
-          Container(
-            height: 50,
-            width: 140,
-            padding: const EdgeInsets.only(left: 10.0),
-            child: const TextField(
-              maxLines: 1,
-              style: TextStyle(fontSize: 15.0),
-              decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                    borderSide: BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
-                    ),
-                  ),
-                  hintText: 'ใส่ตัวเลือก',
-                  fillColor: Colors.white,
-                  filled: true),
-            ),
-          ),
-          const SizedBox(width: 10.0),
-          spinText(":", 30.0),
-          Container(
-            height: 50,
-            width: 60,
-            padding: const EdgeInsets.only(left: 10.0),
-            child: const TextField(
-              maxLines: 1,
-              decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                    borderSide: BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
-                    ),
-                  ),
-                  fillColor: Colors.white,
-                  filled: true),
-            ),
-          ),
-          const SizedBox(width: 10.0),
-          spinText("%", 25.0),
-          AddButton(),
-        ],
-      ),
-    ],
-  );
-}
-
-class AddButton extends StatefulWidget {
-  const AddButton({Key? key}) : super(key: key);
+class AddChoices extends StatefulWidget {
+  final void Function(List<String>) updateChoicesList;
+  const AddChoices({Key? key, required this.updateChoicesList}) : super(key: key);
 
   @override
-  State<AddButton> createState() => _AddButtonState();
+  State<AddChoices> createState() => _AddChoicesState();
 }
 
-class _AddButtonState extends State<AddButton> {
+class _AddChoicesState extends State<AddChoices> {
+  final choiceField = TextEditingController();
+
+  @override
+  void dispose() {
+    choiceField.dispose();
+    super.dispose();
+  }
+
+  void getChoices() {
+    setState(() {
+      final newChoices = [choiceField.text];
+      widget.updateChoicesList(newChoices);
+      choiceField.clear();
+    });
+  }
+
   int num = 0;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-    decoration: const BoxDecoration(
-      gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          colors: [
-            Color(0xff50C878),
-            Color(0xff3EC3A4),
-          ]),
-      shape: BoxShape.circle,
-    ),
-    child: ElevatedButton(
-      child: const Icon(Icons.add),
-      onPressed: () {
-        num++;
-        debugPrint("${num}");
-      },
-      style: ElevatedButton.styleFrom(
-        primary: Colors.transparent,
-        onSurface: Colors.transparent,
-        shadowColor: Colors.transparent,
-        disabledBackgroundColor: Colors.transparent,
-      ),
-    ),
-  );
+    return Column(
+      children: <Widget>[
+        normalText("เพิ่มตัวเลือกในการสุ่ม"),
+        const SizedBox(height: 10.0),
+        Container(
+          padding: const EdgeInsets.only(right: 10.0, left: 10.0),
+          child: const TextField(
+            maxLines: 4,
+            decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  borderSide: BorderSide(
+                    width: 0,
+                    style: BorderStyle.none,
+                  ),
+                ),
+                hintText: 'ตัวเลือกจะแสดงตรงนี้ด้วย',
+                fillColor: Colors.white,
+                filled: true),
+          ),
+        ),
+        const SizedBox(height: 10.0),
+        Row(
+          children: [
+            Container(
+              height: 50,
+              width: 140,
+              padding: const EdgeInsets.only(left: 10.0),
+              child: TextField(
+                controller: choiceField,
+                maxLines: 1,
+                style: const TextStyle(fontSize: 15.0),
+                decoration: const InputDecoration(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      borderSide: BorderSide(
+                        width: 0,
+                        style: BorderStyle.none,
+                      ),
+                    ),
+                    hintText: 'ใส่ตัวเลือก',
+                    fillColor: Colors.white,
+                    filled: true),
+              ),
+            ),
+            const SizedBox(width: 10.0),
+            spinText(":", 30.0),
+            Container(
+              height: 50,
+              width: 60,
+              padding: const EdgeInsets.only(left: 10.0),
+              child: const TextField(
+                maxLines: 1,
+                decoration: InputDecoration(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      borderSide: BorderSide(
+                        width: 0,
+                        style: BorderStyle.none,
+                      ),
+                    ),
+                    fillColor: Colors.white,
+                    filled: true),
+              ),
+            ),
+            const SizedBox(width: 10.0),
+            spinText("%", 25.0),
+            Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    colors: [
+                      Color(0xff50C878),
+                      Color(0xff3EC3A4),
+                    ]),
+                shape: BoxShape.circle,
+              ),
+              child: ElevatedButton(
+                child: const Icon(
+                  Icons.add,
+                  size: 30,
+                ),
+                onPressed: () {
+                  getChoices();
+                  num++;
+                  debugPrint("${widget.updateChoicesList}");
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  primary: Colors.transparent,
+                  onSurface: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  disabledBackgroundColor: Colors.transparent,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }
+
 /*
 const TextField(
         maxLines: 1,
