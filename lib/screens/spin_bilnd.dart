@@ -51,7 +51,7 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                headerText("หมุนวงล้อ"),
+                headerText("หมุนวงล้อ", notblack),
                 Container(
                   height: 300.0,
                   width: 300.0,
@@ -115,11 +115,12 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                                   isCheck = value;
                                 });
                               }),
-                          smallText("สุ่มค่าไม่ซ้ำกัน"),
+                          smallText("สุ่มค่าไม่ซ้ำกัน", notblack),
                         ],
                       ),
                       RollButton(
                         onPressed: isAnimating ? null : handleRoll,
+                        name: 'หมุนเลย',
                       ),
                     ],
                   ),
@@ -168,7 +169,7 @@ class _AddChoicesState extends State<AddChoices> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        normalText("เพิ่มตัวเลือกในการสุ่ม"),
+        normalText("เพิ่มตัวเลือกในการสุ่ม", notblack),
         const SizedBox(height: 10.0),
         Container(
           padding: const EdgeInsets.only(right: 10.0, left: 10.0),

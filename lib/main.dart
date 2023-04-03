@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:make_decisions/screens/mainmenu.dart';
+import 'package:make_decisions/screens/mapTester.dart';
 
 void main() {
   runApp(const MyApp());

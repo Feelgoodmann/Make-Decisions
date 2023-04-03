@@ -10,28 +10,28 @@ import '/resources/colors.dart';
 import 'foodInfo.dart';
 
 
-Widget headerText(text) {
+Widget headerText(text, Color color) {
   return Text(text,
   style:
-    const TextStyle(fontSize: 35, fontFamily: "FCSound"),
+    TextStyle(fontSize: 35, fontFamily: "FCSound", color: color),
     );
 }
-Widget normalText(text){
+Widget normalText(text, Color color){
   return Text(text,
   style:
-    const TextStyle(fontSize: 20, fontWeight: FontWeight.w400,fontFamily: "Mitr"),
+    TextStyle(fontSize: 20, fontWeight: FontWeight.w400,fontFamily: "Mitr", color: color),
     );
 }
-Widget buttonText(text){
+Widget buttonText(text, Color color){
   return Text(text,
   style:
-    const TextStyle(fontSize: 30, fontWeight: FontWeight.w400,fontFamily: "Mitr"),
+    TextStyle(fontSize: 30, fontWeight: FontWeight.w400,fontFamily: "Mitr", color: color),
     );
 }
-Widget smallText(text){
+Widget smallText(text, Color color){
   return Text(text,
   style:
-    const TextStyle(fontSize: 16, fontWeight: FontWeight.w400,fontFamily: "Mitr"),
+      TextStyle(color: color,fontSize: 16, fontWeight: FontWeight.w400,fontFamily: "Mitr"),
     );
 }
 
