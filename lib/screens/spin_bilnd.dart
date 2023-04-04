@@ -28,11 +28,13 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
   bool? isCheck = false;
   final List<Color> colors = [
     Colors.red,
-    Colors.blue,
-    Colors.green,
-    Colors.brown,
-    Colors.purple,
     Colors.orange,
+    Colors.yellow,
+    Colors.green,
+    Colors.blue,
+    Colors.purple,
+    Colors.pink,
+    Colors.brown,
     Colors.blueGrey,
   ];
 
@@ -81,10 +83,8 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                       ],
                       items: List.generate(choices.length, (index) {
                         return FortuneItem(
-                            child: Text(
-                              choices[index],
-                              style: TextStyle(fontSize: 25.0),
-                              textAlign: TextAlign.center,
+                            child: normalText(
+                              choices[index], Colors.white
                             ),
                             style: FortuneItemStyle(
                               color: colors[index % colors.length],

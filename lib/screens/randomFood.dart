@@ -49,7 +49,7 @@ class RandomFoodState extends State<RandomFoodScreen> {
     
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.only(top: 30),
+        padding: const EdgeInsets.only(top: 100),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -168,7 +168,7 @@ class RandomFoodState extends State<RandomFoodScreen> {
                         widget.buttonName = "สุ่มเลย";
                         widget.randomYet = true;
                       });
-                      Timer(const Duration(milliseconds: 1000), () {
+                      Timer(const Duration(milliseconds: 500), () {
                         showDialog(
                           context: context, 
                           builder: (BuildContext context) {
@@ -189,15 +189,7 @@ class RandomFoodState extends State<RandomFoodScreen> {
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                       image,
-                                      Text(
-                                        
-                                        widget.info[randomNumber],
-                                        style: const TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold
-                                        ),
-                                      ),
+                                      normalText(widget.info[randomNumber], notblack),
                                     ],
                                     ),
                                   ),
@@ -236,11 +228,22 @@ class RandomFoodState extends State<RandomFoodScreen> {
                 )
               ),
             ),
-            const Center(
-              child: (
-                specialBackButton()
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(left: 15,bottom: 20),
+                        child: const specialBackButton()
+                      )
+                    ],
+                  ),
+                ],
               )
-            ),
+            )
           ],
         ),
       ),

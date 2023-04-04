@@ -53,7 +53,7 @@ class MapScreenState extends State<MapScreen>{
         
           markers.add(
             Marker(
-              icon: await BitmapDescriptor.fromAssetImage(const ImageConfiguration(size: Size(48, 48)),"assets/images/food2.png"),
+              icon: await BitmapDescriptor.fromAssetImage(const ImageConfiguration(size: Size(1, 1)),"assets/images/userCurrent.png"),
               markerId: const MarkerId('currentLocation'),
               position: LatLng(position.latitude, position.longitude)
             )
@@ -120,6 +120,7 @@ Future<void> _searchPlaces(String query) async {
     // Add new markers for the nearby restaurants
     for (var result in places.results) {
       final marker = Marker(
+        icon: await BitmapDescriptor.fromAssetImage(const ImageConfiguration(size: Size(1, 1)),"assets/images/foodMarker.png"),
         markerId: MarkerId(result.placeId),
         position: LatLng(result.geometry!.location.lat, result.geometry!.location.lng),
         infoWindow: InfoWindow(title: result.name),
