@@ -256,6 +256,7 @@ class _AddChoicesState extends State<AddChoices> {
                 ),
                 onPressed: () {
                   getChoices();
+                  choiceField.clear();
                   num++;
                   debugPrint("${widget.updateChoicesList}");
                 },
