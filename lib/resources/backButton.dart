@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:make_decisions/screens/mainmenu.dart';
-
 import 'colors.dart';
 
 class specialBackButton extends StatelessWidget{
+  const specialBackButton({Key? key}) : super(key: key);
+
   
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class specialBackButton extends StatelessWidget{
       tooltip: 'Back',
       onPressed: () {
         Navigator.pop(context);
-      }, 
+      },
       
     );
   }

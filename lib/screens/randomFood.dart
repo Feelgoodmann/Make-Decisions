@@ -4,12 +4,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:make_decisions/resources/resources.dart';
-import 'package:make_decisions/screens/setting.dart';
 
-import '../resources/backButton.dart';
-import 'package:make_decisions/resources/foodInfo.dart';
 
-import '../resources/colors.dart';
 import 'mapScreen.dart';
 
 // int timeSpining = 100;
@@ -53,7 +49,7 @@ class RandomFoodState extends State<RandomFoodScreen> {
     
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.only(top: 30),
+        padding: const EdgeInsets.only(top: 30),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -63,8 +59,8 @@ class RandomFoodState extends State<RandomFoodScreen> {
               ),
             headerText("กินอะไรดี", notblack),
             Container(
-              padding: EdgeInsets.only(top: 25, bottom: 25),
-              margin: EdgeInsets.only(top: 20, bottom: 20),
+              padding: const EdgeInsets.only(top: 25, bottom: 25),
+              margin: const EdgeInsets.only(top: 20, bottom: 20),
               decoration: BoxDecoration(
                 color: lightgrey,
                 
@@ -76,7 +72,7 @@ class RandomFoodState extends State<RandomFoodScreen> {
                     Container(
                       height: 180,
                       width: double.infinity,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         border: Border(
                           top: BorderSide(width: 10.0, color: Colors.white),
                           bottom: BorderSide(width: 10.0, color: Colors.white),
@@ -145,8 +141,8 @@ class RandomFoodState extends State<RandomFoodScreen> {
             ),
 
             Container(
-              margin: EdgeInsets.only(left: 110, right: 110, bottom: 20),
-              padding: EdgeInsets.all(10),
+              margin: const EdgeInsets.only(left: 110, right: 110, bottom: 20),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(40),
               ),
@@ -172,19 +168,19 @@ class RandomFoodState extends State<RandomFoodScreen> {
                         widget.buttonName = "สุ่มเลย";
                         widget.randomYet = true;
                       });
-                      Timer(Duration(milliseconds: 1000), () {
+                      Timer(const Duration(milliseconds: 1000), () {
                         showDialog(
                           context: context, 
                           builder: (BuildContext context) {
                             AssetImage assetImage = AssetImage(widget.foodImg[randomNumber]);
                             Image image = Image(image: assetImage, width: 100);
                             return AlertDialog(
-                              content: Container(
+                              content: SizedBox(
                                 height: 200,
                                 child: TextButton(
                                   onPressed: () {Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => MapScreen())
+                                    MaterialPageRoute(builder: (context) => const MapScreen())
                                     );
                                   },
                                   child: Container(
@@ -195,8 +191,8 @@ class RandomFoodState extends State<RandomFoodScreen> {
                                       image,
                                       Text(
                                         
-                                        '${widget.info[randomNumber]}',
-                                        style: TextStyle(
+                                        widget.info[randomNumber],
+                                        style: const TextStyle(
                                           fontSize: 20,
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold
@@ -240,7 +236,7 @@ class RandomFoodState extends State<RandomFoodScreen> {
                 )
               ),
             ),
-            Center(
+            const Center(
               child: (
                 specialBackButton()
               )
@@ -255,7 +251,7 @@ class RandomFoodState extends State<RandomFoodScreen> {
     AssetImage assetImage = AssetImage(urlImage);
     Image image = Image(image: assetImage, width: 75);
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 2),
+      margin: const EdgeInsets.symmetric(horizontal: 2),
       child: image,
     );
   }
@@ -263,7 +259,7 @@ class RandomFoodState extends State<RandomFoodScreen> {
   Widget buildText(imgName, int index) {
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 2),
+      margin: const EdgeInsets.symmetric(horizontal: 2),
       child: Visibility(
                 visible: widget.randomYet,
                 maintainSize: true, 
@@ -271,7 +267,7 @@ class RandomFoodState extends State<RandomFoodScreen> {
                 maintainState: true,
                 child: Text(
                   imgName,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 25,
                     fontFamily: "FCSound"
                   ),

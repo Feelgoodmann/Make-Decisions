@@ -29,7 +29,7 @@ class _MainMenuState extends State<MainMenu> {
                 ],
               )
             ),
-            headerText("MakeDecision"),
+            headerText("MakeDecision", notblack),
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
@@ -38,7 +38,7 @@ class _MainMenuState extends State<MainMenu> {
               ),
               child: Column(
                 children:  [
-                  normalText("โปรดเลือกรูปแบบการสุ่ม"),
+                  normalText("โปรดเลือกรูปแบบการสุ่ม", notblack),
                   const SizedBox(height: 20),
                   
                   mainMenuButton('สุ่มตัวเลข', 'assets/images/dice2.png', context),

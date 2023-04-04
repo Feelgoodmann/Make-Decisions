@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:make_decisions/resources/Images.dart';
 import '../resources/backButton.dart';
 import '../resources/colors.dart';
 import '../resources/randomButton.dart';
@@ -28,7 +27,7 @@ class AutoRandomState extends State<AutoRandom> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Center(child: Column(children: [buttonText('ประวัติการสุ่ม', notblack), smallText("10 ครั้งล่าสุด", notblack)],)),
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(25.0))),
           content: SizedBox(
             width: double.maxFinite,
@@ -47,7 +46,7 @@ class AutoRandomState extends State<AutoRandom> {
           ),
           actions: <Widget>[
             TextButton(
-              child: smallText('Clear History', Color.fromARGB(255, 33, 112, 215)),
+              child: smallText('Clear History', const Color.fromARGB(255, 33, 112, 215)),
               onPressed: () {
                 setState(() {
                   history.clear();
@@ -56,7 +55,7 @@ class AutoRandomState extends State<AutoRandom> {
               },
             ),
             TextButton(
-              child: smallText('Close', Color.fromARGB(255, 215, 33, 33)),
+              child: smallText('Close', const Color.fromARGB(255, 215, 33, 33)),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -237,7 +236,7 @@ class AutoRandomState extends State<AutoRandom> {
               onPressed: () {
                 history.isEmpty ? null : showHistoryDialog();
               },
-              icon: Icon(Icons.history_rounded, size: 40)
+              icon: const Icon(Icons.history_rounded, size: 40)
             ),
             Expanded(
               child: Column(
@@ -248,7 +247,7 @@ class AutoRandomState extends State<AutoRandom> {
                     children: [
                       Container(
                         padding: const EdgeInsets.only(left: 15,bottom: 20),
-                        child: specialBackButton()
+                        child: const specialBackButton()
                       )
                     ],
                   ),

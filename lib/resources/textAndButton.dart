@@ -1,11 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:make_decisions/screens/mainmenu.dart';
-import 'package:make_decisions/screens/randomFood.dart';
 import 'package:make_decisions/screens/spin_bilnd.dart';
 import 'package:make_decisions/screens/auto_random.dart';
-import '../screens/setting.dart';
 import '/resources/colors.dart';
 import 'foodInfo.dart';
 
@@ -48,13 +43,13 @@ Widget mainMenuButton(String text, String asset, BuildContext context) {
   return ElevatedButton(
     onPressed: () {
       if(text == 'สุ่มตัวเลข'){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => AutoRandom())); //wwwwwwwwwwwwwwwwwwwwwwwwww
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const AutoRandom())); //wwwwwwwwwwwwwwwwwwwwwwwwww
       }
       else if(text == 'หมุนวงล้อ'){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => SpinBilndWheel())); //wwwwwwwwwwwwwwwwwwwwwwwww
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const SpinBilndWheel())); //wwwwwwwwwwwwwwwwwwwwwwwww
       }
       else if(text == 'กินอะไรดี'){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => FoodResInfo()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const FoodResInfo()));
       }
     },
     style: ElevatedButton.styleFrom(

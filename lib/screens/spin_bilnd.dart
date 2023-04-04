@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import '../resources/resources.dart';
 
 class SpinBilndWheel extends StatefulWidget {
@@ -44,7 +42,7 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                 Container(
                   height: 300.0,
                   width: 300.0,
-                  padding: EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(20.0),
                   child: Expanded(
                     child: FortuneWheel(
                       animateFirst: false,
@@ -73,7 +71,7 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                         return FortuneItem(
                             child: Text(
                           choices[index],
-                          style: TextStyle(fontSize: 25.0),
+                          style: const TextStyle(fontSize: 25.0),
                           textAlign: TextAlign.center,
                         ));
                       }),
@@ -113,7 +111,7 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [specialBackButton()],
+                  children: const [specialBackButton()],
                 ),
               ],
             ),
@@ -195,7 +193,7 @@ Widget ChiocesField() {
           ),
           const SizedBox(width: 10.0),
           spinText("%", 25.0),
-          AddButton(),
+          const AddButton(),
         ],
       ),
     ],
@@ -226,17 +224,17 @@ class _AddButtonState extends State<AddButton> {
       shape: BoxShape.circle,
     ),
     child: ElevatedButton(
-      child: const Icon(Icons.add),
       onPressed: () {
         num++;
-        debugPrint("${num}");
+        debugPrint("$num");
       },
       style: ElevatedButton.styleFrom(
-        primary: Colors.transparent,
-        onSurface: Colors.transparent,
+        backgroundColor: Colors.transparent,
+        disabledForegroundColor: Colors.transparent.withOpacity(0.38), disabledBackgroundColor: Colors.transparent.withOpacity(0.12),
         shadowColor: Colors.transparent,
-        disabledBackgroundColor: Colors.transparent,
+        //disabledBackgroundColor: Colors.transparent,
       ),
+      child: const Icon(Icons.add),
     ),
   );
   }
