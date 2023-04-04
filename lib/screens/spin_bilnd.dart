@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
@@ -55,7 +54,7 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                 Container(
                   height: 300.0,
                   width: 300.0,
-                  padding: EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(20.0),
                   child: Expanded(
                     child: FortuneWheel(
                       animateFirst: false,
@@ -127,7 +126,7 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [specialBackButton()],
+                  children: const [specialBackButton()],
                 ),
               ],
             ),

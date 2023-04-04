@@ -1,4 +1,3 @@
-import 'colors.dart';
 import 'package:flutter/material.dart';
 
 Widget logoImage(String asset) {

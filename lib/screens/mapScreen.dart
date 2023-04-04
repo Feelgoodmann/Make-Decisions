@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
@@ -10,7 +9,7 @@ final _placesApiClient = GoogleMapsPlaces(apiKey: 'AIzaSyDprcfIeMnQP5qaRniFxsG0U
 class MapScreen extends StatefulWidget {
   
 
-  MapScreen({Key? key}) : super(key: key);
+  const MapScreen({Key? key}) : super(key: key);
   
   @override
   State<MapScreen> createState() => MapScreenState();
@@ -51,18 +50,16 @@ class MapScreenState extends State<MapScreen>{
 
 
           markers.clear();
-
+        
           markers.add(
             Marker(
-              icon: BitmapDescriptor.fromAsset(
-              "assets/images/food2.png"
-            ),        
+              icon: await BitmapDescriptor.fromAssetImage(const ImageConfiguration(size: Size(48, 48)),"assets/images/food2.png"),
               markerId: const MarkerId('currentLocation'),
               position: LatLng(position.latitude, position.longitude)
             )
           );
-          color: Color.fromARGB(255, 20, 16, 255);
-          icon: Icon(Icons.man);
+          color: const Color.fromARGB(255, 20, 16, 255);
+          icon: const Icon(Icons.man);
 
           await _searchPlaces("อาหารญี่ปุ่น");
           setState(() {});
@@ -121,20 +118,20 @@ Future<void> _searchPlaces(String query) async {
     // Clear previous markers
 
     // Add new markers for the nearby restaurants
-    places.results.forEach((result) {
+    for (var result in places.results) {
       final marker = Marker(
         markerId: MarkerId(result.placeId),
         position: LatLng(result.geometry!.location.lat, result.geometry!.location.lng),
         infoWindow: InfoWindow(title: result.name),
       );
-      icon: Icon(Icons.dining);
-      color: Color.fromARGB(255, 198, 13, 0);
+      icon: const Icon(Icons.dining);
+      color: const Color.fromARGB(255, 198, 13, 0);
       markers.add(marker);
-    });
+    }
 
     setState(() {});
   } else {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
       content: Text('No restaurants found nearby.'),
     ));
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:make_decisions/screens/mainmenu.dart';
-import 'package:make_decisions/screens/mapTester.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainMenu(),
+      home: const MainMenu(),
     );
   }
 }

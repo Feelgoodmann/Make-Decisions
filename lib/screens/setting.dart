@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '/resources/colors.dart';
 import '../resources/textAndButton.dart';
-import '/screens/auto_random.dart';
 
 bool _sound = true;
 bool _vibrate = true;
