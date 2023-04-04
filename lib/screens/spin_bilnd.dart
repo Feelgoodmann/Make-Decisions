@@ -44,102 +44,116 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                headerText("หมุนวงล้อ", notblack),
-                Container(
-                  height: 300.0,
-                  width: 300.0,
-                  padding: const EdgeInsets.all(20.0),
-                  child: Expanded(
-                    child: FortuneWheel(
-                      animateFirst: false,
-                      onAnimationStart: () {
-                        setState(() {
-                          isAnimating = true;
-                        });
-                      },
-                      onAnimationEnd: () {
-                        setState(() {
-                          isAnimating = false;
-                        });
-                      },
-                      selected: selected.stream,
-                      indicators: const <FortuneIndicator>[
-                        FortuneIndicator(
-                          alignment: Alignment
-                              .topCenter, // <-- changing the position of the indicator
-                          child: TriangleIndicator(
-                            color: Color(
-                                0xFFF0BA75), // <-- changing the color of the indicator
-                          ),
-                        ),
-                      ],
-                      items: List.generate(choices.length, (index) {
-                        return FortuneItem(
-                            child: normalText(
-                              choices[index], Colors.white
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    body: SafeArea(
+      child: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    headerText("หมุนวงล้อ", notblack),
+                    Container(
+                      height: 300.0,
+                      width: 300.0,
+                      padding: const EdgeInsets.all(20.0),
+                      child: Expanded(
+                        child: FortuneWheel(
+                          animateFirst: false,
+                          onAnimationStart: () {
+                            setState(() {
+                              isAnimating = true;
+                            });
+                          },
+                          onAnimationEnd: () {
+                            setState(() {
+                              isAnimating = false;
+                            });
+                          },
+                          selected: selected.stream,
+                          indicators: const <FortuneIndicator>[
+                            FortuneIndicator(
+                              alignment: Alignment
+                                  .topCenter, // <-- changing the position of the indicator
+                              child: TriangleIndicator(
+                                color: Color(
+                                    0xFFF0BA75), // <-- changing the color of the indicator
+                              ),
                             ),
-                            style: FortuneItemStyle(
-                              color: colors[index % colors.length],
-                            ));
-                      }),
+                          ],
+                          items: List.generate(choices.length, (index) {
+                            return FortuneItem(
+                                child: normalText(
+                                  choices[index], Colors.white
+                                ),
+                                style: FortuneItemStyle(
+                                  borderColor: Colors.white,
+                                  color: colors[index % colors.length],
+                                ));
+                          }),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 30.0),
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(25)),
-                    color: lightgrey,
-                  ),
-                  child: Column(
-                    children: [
-                      AddChoices(updateChoicesList: updateChoicesList),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 30.0),
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(Radius.circular(25)),
+                        color: lightgrey,
+                      ),
+                      child: Column(
                         children: [
-                          Checkbox(
-                              value: isCheck,
-                              activeColor: notgreen,
-                              onChanged: (value) {
-                                setState(() {
-                                  isCheck = value;
-                                });
-                              }),
-                          smallText("สุ่มค่าไม่ซ้ำกัน", notblack),
+                          AddChoices(updateChoicesList: updateChoicesList),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Checkbox(
+                                value: isCheck,
+                                activeColor: notgreen,
+                                onChanged: (value) {
+                                  setState(() {
+                                    isCheck = value;
+                                  });
+                                }
+                              ),
+                              smallText("สุ่มค่าไม่ซ้ำกัน", notblack),
+                            ],
+                          ),
+                          RollButton(
+                            onPressed: isAnimating ? null : handleRoll,
+                            name: 'หมุนเลย',
+                          ),
                         ],
                       ),
-                      RollButton(
-                        onPressed: isAnimating ? null : handleRoll,
-                        name: 'หมุนเลย',
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [specialBackButton()],
-                ),
-              ],
+              ),
             ),
-          ),
+            Container(
+              margin: const EdgeInsets.only(bottom: 20.0, left: 20.0),
+              child: const Align(
+                alignment: Alignment.bottomLeft,
+                child: specialBackButton(),
+              ),
+            ),
+          ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
+
 }
 
 class AddChoices extends StatefulWidget {
   final void Function(List<String>) updateChoicesList;
-  const AddChoices({Key? key, required this.updateChoicesList}) : super(key: key);
+  const AddChoices({Key? key, required this.updateChoicesList})
+      : super(key: key);
 
   @override
   State<AddChoices> createState() => _AddChoicesState();
