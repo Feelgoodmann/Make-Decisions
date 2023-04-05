@@ -78,12 +78,6 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
           ),
           actions: <Widget>[
             ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('OK'),
-            ),
-            ElevatedButton(
               onPressed: (choices.length > 2)
                   ? () {
                       setState(() {
@@ -94,7 +88,19 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                       Navigator.of(context).pop();
                     }
                   : null,
-              child: const Text('Remove'),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xffC85050),
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10)),
+              child: normalText('ลบ', Colors.white),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xff0573CE),
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10)),
+              child: normalText('ตกลง', Colors.white),
             ),
           ],
         );
@@ -140,7 +146,8 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                                 alignment: Alignment
                                     .topCenter, // <-- changing the position of the indicator
                                 child: TriangleIndicator(
-                                  color: Color.fromARGB(255, 17, 144, 255), // <-- changing the color of the indicator
+                                  color: Color.fromARGB(255, 17, 144,
+                                      255), // <-- changing the color of the indicator
                                 ),
                               ),
                             ],
@@ -321,34 +328,36 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                                     spinText("%", 25.0),
                                     ElevatedButton(
                                       onPressed: () {
-                                            if (choiceField.text.isEmpty) {
-                                              debugPrint("TextField empty");
-                                            } else if (choices.length == 12 ||
-                                                isAnimating == true) {
-                                              null;
-                                            } else {
-                                              addChoice(choiceField.text);
-                                              choiceField.clear();
-                                            }
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            shape: CircleBorder(),
-                                            primary: Colors.transparent,
-                                            onSurface: Colors.transparent,
-                                            shadowColor: Colors.transparent,
-                                            disabledBackgroundColor:
-                                                Colors.transparent,
-                                          ),
-                                      child: CircleAvatar(
-                                      backgroundColor: notgreen,
-                                      radius: 17,
-                                      child: Icon(
-                                        Icons.add,
-                                        color: Colors.white,
-                                        size: 23,
+                                        if (choiceField.text.isEmpty) {
+                                          debugPrint("TextField empty");
+                                        } else if (choices.length == 12 ||
+                                            isAnimating == true) {
+                                          null;
+                                        } else {
+                                          addChoice(choiceField.text);
+                                          choiceField.clear();
+                                        }
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        shape: CircleBorder(),
+                                        primary: Colors.transparent,
+                                        onSurface: Colors.transparent,
+                                        shadowColor: Colors.transparent,
+                                        disabledBackgroundColor:
+                                            Colors.transparent,
                                       ),
-                                    ),),
-                                    
+                                      child: CircleAvatar(
+                                        backgroundColor: (choices.length < 12)
+                                            ? notgreen
+                                            : notgrey,
+                                        radius: 17,
+                                        child: Icon(
+                                          Icons.add,
+                                          color: Colors.white,
+                                          size: 23,
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ],
