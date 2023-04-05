@@ -11,9 +11,13 @@ import 'mapScreen.dart';
 // int timeSpining = 100;
 // int timeChanging = 100;
 
+List<bool> _isChecked = [true, true, true, true
+, true, true, true, true, true, true, true, true];
+List<String> foodChecked = ["assets/images/food2.png"];
 
 class RandomFoodScreen extends StatefulWidget{
 
+  List<String> check = List<String>.filled(12, '');
   String buttonName = "สุ่มเลย";
   final int num = 1;
   final List<String> info;
@@ -121,24 +125,39 @@ class RandomFoodState extends State<RandomFoodScreen> {
                 ],
               )
             ),
-            Container(
-              child: CarouselSlider.builder(
-                itemCount: 12, 
-                options: CarouselOptions(
-                  height: 120,
-                  autoPlay: !widget.randomYet,
-                  autoPlayInterval: Duration(milliseconds: widget.timeSpining),
-                  autoPlayAnimationDuration: Duration(milliseconds: widget.timeChanging),
-                ),
+            // Container(
+            //   child: CarouselSlider.builder(
+            //     itemCount: 12, 
+            //     options: CarouselOptions(
+            //       height: 120,
+            //       autoPlay: !widget.randomYet,
+            //       autoPlayInterval: Duration(milliseconds: widget.timeSpining),
+            //       autoPlayAnimationDuration: Duration(milliseconds: widget.timeChanging),
+            //     ),
 
-                itemBuilder: (context, index, realIndex) {
-                  final imgName = widget.info[index];
+            //     itemBuilder: (context, index, realIndex) {
+            //       final imgName = widget.info[index];
                         
-                  return buildText(imgName, index++);
-                }, 
-              ),
+            //       return buildText(imgName, index++);
+            //     }, 
+            //   ),
 
-            ),
+            // ),
+              Container(
+                height: 200,
+                margin: EdgeInsets.only(left: 10, right: 10),
+              padding: EdgeInsets.only(left: 25),
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(25)),
+                color: lightgrey,
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: _buildCheckboxes(0)
+              ),
+              ), 
+              ),
 
             Container(
               margin: const EdgeInsets.only(left: 110, right: 110, bottom: 20),
@@ -154,19 +173,9 @@ class RandomFoodState extends State<RandomFoodScreen> {
                       setState(() {
                         // widget.randomYet = true;
                         randomNumber = Random().nextInt(11);
-                        print(randomNumber);
                         widget.timeSpining = 50;
                         widget.timeChanging = 100;
 
-                        widget.buttonName = "หยุด!";
-                      });
-                    }
-                      else {
-                      
-                      setState(() {
-                        
-                        widget.buttonName = "สุ่มเลย";
-                        widget.randomYet = true;
                       });
                       Timer(const Duration(milliseconds: 500), () {
                         showDialog(
@@ -249,6 +258,12 @@ class RandomFoodState extends State<RandomFoodScreen> {
       ),
     );
   }
+  // int _autoPlayInterval = 5000;
+  // void _changeInterval(int newInterval) {
+  //   setState(() {
+  //     _autoPlayInterval = newInterval;
+  //   });
+  // }
   
   Widget buildImage(urlImage, int index) {
     AssetImage assetImage = AssetImage(urlImage);
@@ -259,24 +274,67 @@ class RandomFoodState extends State<RandomFoodScreen> {
     );
   }
 
-  Widget buildText(imgName, int index) {
+  // Widget buildText(imgName, int index) {
 
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 2),
-      child: Visibility(
-                visible: widget.randomYet,
-                maintainSize: true, 
-                maintainAnimation: true,
-                maintainState: true,
-                child: Text(
-                  imgName,
-                  style: const TextStyle(
-                    fontSize: 25,
-                    fontFamily: "FCSound"
-                  ),
-                ),
-              ),
+  //   return Container(
+  //     margin: const EdgeInsets.symmetric(horizontal: 2),
+  //     child: Visibility(
+  //               visible: widget.randomYet,
+  //               maintainSize: true, 
+  //               maintainAnimation: true,
+  //               maintainState: true,
+  //               child: Text(
+  //                 imgName,
+  //                 style: const TextStyle(
+  //                   fontSize: 25,
+  //                   fontFamily: "FCSound"
+  //                 ),
+  //               ),
+  //             ),
+  //   );
+  // }
+
+  List<Widget> _buildCheckboxes(int numRow) {
+  List<Widget> checkboxes = [];
+  for (var i = 0; i < 12; i++) {
+    checkboxes.add(
+      Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Checkbox(
+            value: _isChecked[i + numRow],
+            onChanged: (bool? value) {
+              setState(() {
+                int x = 0;
+                int y = 0;
+                _isChecked[i + numRow] = value!;
+                foodChecked.add(widget.foodImg[i + numRow]);
+                print(foodChecked);
+                if(value) {
+                  while(x < 12){
+                    widget.check[x] = foodChecked[y];
+                    if(y < foodChecked.length) y = 0; 
+                    x++;
+                  }
+                }
+                else{
+                  if(value) {
+                  widget.check[i + numRow] = " ";
+                }
+                }
+              });
+            },
+          ),
+          smallText(
+            widget.info[i + numRow],
+            notblack
+            
+          ),
+        ],
+      ),
     );
   }
-  
+  return checkboxes;
+}
+
 }
