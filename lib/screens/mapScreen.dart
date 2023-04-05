@@ -1,13 +1,16 @@
 import 'dart:async';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_webservice/places.dart';
+import 'package:make_decisions/resources/colors.dart';
 
 final _placesApiClient = GoogleMapsPlaces(apiKey: 'AIzaSyDprcfIeMnQP5qaRniFxsG0Uhy880aZA50');
 
 class MapScreen extends StatefulWidget {
-  
   String info;
   MapScreen({Key? key,required this.info}) : super(key: key);
   
@@ -16,20 +19,41 @@ class MapScreen extends StatefulWidget {
 }
 
 class MapScreenState extends State<MapScreen>{
-
   late GoogleMapController googleMapController;
   
-
   Set<Marker> markers = {};
 
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentLocation();
+  }
+  
+  void _getCurrentLocation() async {
+  Position position = await _determinePosition();
+  
+  googleMapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(position.latitude, position.longitude), zoom: 16)));
+
+  final Uint8List userIcon = await getBytesFromAsset('assets/images/userCurrent1.png', 130);
+  markers.add(
+    Marker(
+      icon: BitmapDescriptor.fromBytes(userIcon),
+      markerId: const MarkerId('currentLocation'),
+      position: LatLng(position.latitude, position.longitude)
+    )
+  );
+
+  await _searchPlaces(widget.info);
+  setState(() {});
+}
+
   static const _initialCameraPosition = CameraPosition(
-    target: LatLng(37.773972, -122.431297),
-    zoom: 11.5,
+    target: LatLng(16.4740, 102.8220),
+    zoom: 15,
   );
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: GoogleMap(
         myLocationButtonEnabled: true,
@@ -41,38 +65,15 @@ class MapScreenState extends State<MapScreen>{
           googleMapController = controller;
         },
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          Position position = await _determinePosition();
-
-          googleMapController
-              .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(position.latitude, position.longitude), zoom: 14)));
-
-
-          markers.clear();
-        
-          markers.add(
-            Marker(
-              icon: await BitmapDescriptor.fromAssetImage(const ImageConfiguration(size: Size(1, 1)),"assets/images/userCurrent.png"),
-              markerId: const MarkerId('currentLocation'),
-              position: LatLng(position.latitude, position.longitude)
-            )
-          );
-          color: const Color.fromARGB(255, 20, 16, 255);
-          icon: const Icon(Icons.man);
-
-          await _searchPlaces(widget.info);
-          setState(() {});
-
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: notgrey,
+        foregroundColor: Colors.white,
+        onPressed: () {
+          Navigator.pop(context);
         },
-        label: const Text("Current Location"),
-        icon: const Icon(Icons.location_history),
-      ),
+        child: const Icon(Icons.arrow_back_ios_rounded,),
+        ),floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
     );
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: null,
-      //   child: const Icon(Icons.arrow_forward),
-      // ),
   }
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
@@ -113,22 +114,23 @@ Future<void> _searchPlaces(String query) async {
 
   if (places.status == "OK" && places.results.isNotEmpty) {
     googleMapController.animateCamera(CameraUpdate.newCameraPosition(
-        CameraPosition(target: latLng, zoom: 14)));
+        CameraPosition(target: latLng, zoom: 16)));
 
     // Clear previous markers
 
     // Add new markers for the nearby restaurants
+    
+    final Uint8List foodIcon = await getBytesFromAsset('assets/images/foodMarker1.png', 130);
     for (var result in places.results) {
       final marker = Marker(
-        icon: await BitmapDescriptor.fromAssetImage(const ImageConfiguration(size: Size(1, 1)),"assets/images/foodMarker.png"),
+        icon: BitmapDescriptor.fromBytes(foodIcon),
         markerId: MarkerId(result.placeId),
         position: LatLng(result.geometry!.location.lat, result.geometry!.location.lng),
         infoWindow: InfoWindow(title: result.name),
       );
-      icon: const Icon(Icons.dining);
-      color: const Color.fromARGB(255, 198, 13, 0);
       markers.add(marker);
     }
+    //googleMapController.showMarkerInfoWindow(MarkerId(places.results[0].placeId));
 
     setState(() {});
   } else {
@@ -136,5 +138,11 @@ Future<void> _searchPlaces(String query) async {
       content: Text('No restaurants found nearby.'),
     ));
   }
+}
+Future<Uint8List> getBytesFromAsset(String path, int width) async {
+  ByteData data = await rootBundle.load(path);
+  ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+  ui.FrameInfo fi = await codec.getNextFrame();
+  return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
 }
 }
