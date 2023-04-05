@@ -55,6 +55,12 @@ Widget smallText(text, Color color){
       TextStyle(color: color,fontSize: 16, fontWeight: FontWeight.w400,fontFamily: "Mitr"),
     );
 }
+Widget smallBoldText(text, Color color){
+  return Text(text,
+  style:
+      TextStyle(color: color,fontSize: 16, fontWeight: FontWeight.w800,fontFamily: "Mitr"),
+    );
+}
 
 Widget spinText(text, double size){
   return Text(text,

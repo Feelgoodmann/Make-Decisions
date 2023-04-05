@@ -114,7 +114,7 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      const SizedBox(height: 40),
+                      const SizedBox(height: 5),
                       headerText("หมุนวงล้อ", notblack),
                       Container(
                         height: 300.0,
@@ -140,8 +140,7 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                                 alignment: Alignment
                                     .topCenter, // <-- changing the position of the indicator
                                 child: TriangleIndicator(
-                                  color: Color(
-                                      0xFFF0BA75), // <-- changing the color of the indicator
+                                  color: Color.fromARGB(255, 17, 144, 255), // <-- changing the color of the indicator
                                 ),
                               ),
                             ],
@@ -169,15 +168,16 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                           children: [
                             Column(
                               children: [
-                                normalText("เพิ่มตัวเลือกในการสุ่ม", notblack),
+                                normalText("ตัวเลือกในการสุ่ม", notblack),
                                 const SizedBox(height: 5),
                                 Container(
                                   margin: const EdgeInsets.symmetric(
                                       horizontal: 10.0),
                                   padding: const EdgeInsets.all(10),
                                   decoration: const BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(25)),
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(25),
+                                        topRight: Radius.circular(25)),
                                     color: Colors.white,
                                   ),
                                   constraints: BoxConstraints(
@@ -186,53 +186,78 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                                     minWidth: 500,
                                   ),
                                   child: SingleChildScrollView(
-                                    child: Wrap(
-                                      spacing: 8,
-                                      runSpacing: 8,
-                                      children: choices.map((value) {
-                                        return GestureDetector(
-                                          onTap: () => (choices.length > 2)
-                                              ? removeChoice(value)
-                                              : null,
-                                          child: Chip(
-                                            label: Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Text(
-                                                  value,
-                                                  style:
-                                                    const TextStyle(fontSize: 16),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Wrap(
+                                          spacing: 5,
+                                          runSpacing: -7,
+                                          children: choices.map((value) {
+                                            return GestureDetector(
+                                              onTap: () => (choices.length > 2)
+                                                  ? removeChoice(value)
+                                                  : null,
+                                              child: Chip(
+                                                label: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                    Text(
+                                                      value,
+                                                      style: const TextStyle(
+                                                          fontSize: 16),
+                                                    ),
+                                                    const SizedBox(width: 3),
+                                                    const CircleAvatar(
+                                                      backgroundColor:
+                                                          Color(0xffC85050),
+                                                      radius: 9,
+                                                      child: Icon(
+                                                        Icons.close,
+                                                        color: Colors.white,
+                                                        size: 11,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                                const SizedBox(width: 3),
-                                                const CircleAvatar(
-                                                  backgroundColor: Color(0xffC85050),
-                                                  radius: 9,
-                                                  child: Icon(
-                                                    Icons.close,
-                                                    color: Colors.white,
-                                                    size: 11,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            deleteIcon: const Icon(Icons.clear),
+                                                deleteIcon:
+                                                    const Icon(Icons.clear),
+                                              ),
+                                            );
+                                          }).toList(),
+                                        ),
+                                        const SizedBox(
+                                            height: 85), // Add spacing
+                                        Container(
+                                          alignment: Alignment
+                                              .bottomRight, // Align to the bottom right
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              const Text(
+                                                'Limit:',
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              const SizedBox(width: 4),
+                                              const Text(
+                                                '12',
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ],
                                           ),
-                                        );
-                                      }).toList(),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
                                 const SizedBox(height: 5),
-                                Row(
-                                  children: [
-                                    Padding(padding: EdgeInsets.only(right: 235)),
-                                    Text('Limit: 12',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold
-                                      ),
-                                    )
-                                  ],
-                                ),
                                 Row(
                                   children: [
                                     Container(
@@ -250,8 +275,13 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                                                     vertical: 10,
                                                     horizontal: 10),
                                             border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(15)),
+                                              borderRadius: BorderRadius.only(
+                                                  bottomLeft:
+                                                      Radius.circular(15),
+                                                  bottomRight:
+                                                      Radius.circular(10),
+                                                  topRight:
+                                                      Radius.circular(10)),
                                               borderSide: BorderSide(
                                                 width: 0,
                                                 style: BorderStyle.none,
@@ -274,11 +304,10 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                                         decoration: InputDecoration(
                                             contentPadding:
                                                 EdgeInsets.symmetric(
-                                                    vertical: 10,
-                                                    horizontal: 10),
+                                                    vertical: 5, horizontal: 5),
                                             border: OutlineInputBorder(
                                               borderRadius: BorderRadius.all(
-                                                  Radius.circular(15)),
+                                                  Radius.circular(10)),
                                               borderSide: BorderSide(
                                                 width: 0,
                                                 style: BorderStyle.none,
@@ -290,69 +319,41 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                                     ),
                                     const SizedBox(width: 10.0),
                                     spinText("%", 25.0),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                            begin: Alignment.topRight,
-                                            end: Alignment.bottomLeft,
-                                            colors: [
-                                              Color((choices.length < 12)
-                                                  ? 0xff50C878
-                                                  : 0xff6f6f6f),
-                                              Color((choices.length < 12)
-                                                  ? 0xff3EC3A4
-                                                  : 0xff6f6f6f),
-                                            ]),
-                                        shape: BoxShape.circle,
+                                    ElevatedButton(
+                                      onPressed: () {
+                                            if (choiceField.text.isEmpty) {
+                                              debugPrint("TextField empty");
+                                            } else if (choices.length == 12 ||
+                                                isAnimating == true) {
+                                              null;
+                                            } else {
+                                              addChoice(choiceField.text);
+                                              choiceField.clear();
+                                            }
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            shape: CircleBorder(),
+                                            primary: Colors.transparent,
+                                            onSurface: Colors.transparent,
+                                            shadowColor: Colors.transparent,
+                                            disabledBackgroundColor:
+                                                Colors.transparent,
+                                          ),
+                                      child: CircleAvatar(
+                                      backgroundColor: notgreen,
+                                      radius: 17,
+                                      child: Icon(
+                                        Icons.add,
+                                        color: Colors.white,
+                                        size: 23,
                                       ),
-                                      child: ElevatedButton(
-                                        child: const Icon(
-                                          Icons.add,
-                                          size: 30,
-                                        ),
-                                        onPressed: () {
-                                          if (choiceField.text.isEmpty) {
-                                            debugPrint("TextField empty");
-                                          } else if (choices.length == 12 ||
-                                              isAnimating == true) {
-                                            null;
-                                          } else {
-                                            addChoice(choiceField.text);
-                                            choiceField.clear();
-                                          }
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          shape: CircleBorder(),
-                                          primary: Colors.transparent,
-                                          onSurface: Colors.transparent,
-                                          shadowColor: Colors.transparent,
-                                          disabledBackgroundColor:
-                                              Colors.transparent,
-                                        ),
-                                      ),
-                                    ),
+                                    ),),
+                                    
                                   ],
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 5),
-                            /*
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Checkbox(
-                                    value: isCheck,
-                                    activeColor: notgreen,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        isCheck = value;
-                                      });
-                                    }),
-                                smallText("สุ่มค่าไม่ซ้ำกัน", notblack),
-                              ],
-                            ),
-                            */
-                            //const SizedBox(height: 10.0),
+                            const SizedBox(height: 10),
                             RollButton(
                               onPressed: isAnimating ? null : handleRoll,
                               name: 'หมุนเลย',
