@@ -4,7 +4,33 @@ import 'package:make_decisions/screens/auto_random.dart';
 import '/resources/colors.dart';
 import 'foodInfo.dart';
 
-
+Widget wheelText(text, Color color, Color stroke){
+  return Stack(
+  children: <Widget>[
+    // Stroked text as border.
+    Text(
+      text,
+      style: TextStyle(
+        fontSize: 22,
+        fontFamily: "Mitr",
+        foreground: Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1.5
+          ..color = stroke,
+      ),
+    ),
+    // Solid text as fill.
+    Text(
+      text,
+      style: TextStyle(
+        fontSize: 22,
+         fontFamily: "Mitr",
+        color: color,
+      ),
+    ),
+  ],
+ );
+}
 Widget headerText(text, Color color) {
   return Text(text,
   style:
