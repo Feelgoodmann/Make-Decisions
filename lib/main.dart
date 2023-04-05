@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:make_decisions/resources/foodInfo.dart';
+import 'package:make_decisions/screens/auto_random.dart';
 import 'package:make_decisions/screens/mainmenu.dart';
+import 'package:make_decisions/screens/mapScreen.dart';
+import 'package:make_decisions/screens/setting.dart';
+import 'package:make_decisions/screens/spin_bilnd.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,6 +30,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const MainMenu(),
+      routes: {
+        '/':(context) => MainMenu(),
+        '/setting':(context) => Setting(),
+        '/randomNum':(context) => AutoRandom(),
+        '/randomSpin':(context) => SpinBilndWheel(),
+        '/randomFood':(context) => FoodResInfo(),
+      },
     );
   }
 }
