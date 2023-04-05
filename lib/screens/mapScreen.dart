@@ -8,8 +8,8 @@ final _placesApiClient = GoogleMapsPlaces(apiKey: 'AIzaSyDprcfIeMnQP5qaRniFxsG0U
 
 class MapScreen extends StatefulWidget {
   
-
-  const MapScreen({Key? key}) : super(key: key);
+  String info;
+  MapScreen({Key? key,required this.info}) : super(key: key);
   
   @override
   State<MapScreen> createState() => MapScreenState();
@@ -61,7 +61,7 @@ class MapScreenState extends State<MapScreen>{
           color: const Color.fromARGB(255, 20, 16, 255);
           icon: const Icon(Icons.man);
 
-          await _searchPlaces("อาหารญี่ปุ่น");
+          await _searchPlaces(widget.info);
           setState(() {});
 
         },
@@ -108,7 +108,7 @@ Future<void> _searchPlaces(String query) async {
       Location(lat: latLng.latitude, lng: latLng.longitude),
       1000,
       type: "restaurant",
-      keyword: "อาหารญี่ปุ่น"
+      keyword: widget.info
     );
 
   if (places.status == "OK" && places.results.isNotEmpty) {

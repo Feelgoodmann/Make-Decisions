@@ -180,7 +180,7 @@ class RandomFoodState extends State<RandomFoodScreen> {
                                 child: TextButton(
                                   onPressed: () {Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => const MapScreen())
+                                    MaterialPageRoute(builder: (context) => MapScreen(info: widget.info[randomNumber]))
                                     );
                                   },
                                   child: Container(
