@@ -7,6 +7,7 @@ import '../resources/randomButton.dart';
 import '../resources/textAndButton.dart';
 import 'package:vibration/vibration.dart';
 import '/resources/images.dart' as img;
+import '/screens/setting.dart';
 class AutoRandom extends StatefulWidget{
   const AutoRandom({Key? key}) : super(key: key);
   
@@ -72,8 +73,8 @@ class AutoRandomState extends State<AutoRandom> {
 
   void handleRandom() { 
     if (_formKey.currentState!.validate()) {
-      AudioPlayer().play(AssetSource('audio/s2s.mp3'));
-      Vibration.vibrate(duration: 500);
+      //AudioPlayer().play(AssetSource('audio/s2s.mp3'));
+      //Vibration.vibrate(duration: 500);
       setState(() {
         isFirst = 1;
         minNumber = int.parse(minController.text);
@@ -88,8 +89,8 @@ class AutoRandomState extends State<AutoRandom> {
       });
     }
    else {
-      AudioPlayer().play(AssetSource('audio/s1.mp3'));
-      Vibration.vibrate(duration: 500);
+      //AudioPlayer().play(AssetSource('audio/s1.mp3'));
+      //Vibration.vibrate(duration: 500);
    }
 
   }
@@ -247,7 +248,7 @@ class AutoRandomState extends State<AutoRandom> {
                     children: [
                       Container(
                         padding: const EdgeInsets.only(left: 15,bottom: 20),
-                        child: const specialBackButton()
+                        child: const godBackButton()
                       )
                     ],
                   ),

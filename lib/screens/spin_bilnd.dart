@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
@@ -19,6 +20,7 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
     "หมูน้อย",
     "ชิวเล้า",
   ];
+  bool _keyboardVisible = false;
 
   bool isAnimating = false;
   bool? isCheck = false;
@@ -65,14 +67,16 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(25.0))),
           content: Container(
             width: 100.0,
-            height: 100.0,
+            height: 80.0,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                normalText('${choices[selectedValue]}', notblack),
+                buttonText('${choices[selectedValue]}', notblack),
               ],
             ),
           ),
@@ -85,21 +89,30 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                         // reset the selected value to the first item
                         selectedValue = 0;
                       });
+                      FocusManager.instance.primaryFocus?.unfocus();
                       Navigator.of(context).pop();
                     }
                   : null,
               style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xffC85050),
-                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10)),
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  ),
               child: normalText('ลบ', Colors.white),
             ),
             ElevatedButton(
               onPressed: () {
+                FocusManager.instance.primaryFocus?.unfocus();
                 Navigator.of(context).pop();
               },
               style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xff0573CE),
-                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10)),
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),),
               child: normalText('ตกลง', Colors.white),
             ),
           ],
@@ -110,6 +123,7 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
 
   @override
   Widget build(BuildContext context) {
+    _keyboardVisible = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -120,7 +134,7 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      const SizedBox(height: 5),
+                      const SizedBox(height: 10),
                       headerText("หมุนวงล้อ", notblack),
                       Container(
                         height: 300.0,
@@ -184,7 +198,8 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                                   decoration: const BoxDecoration(
                                     borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(25),
-                                        topRight: Radius.circular(25)),
+                                        topRight: Radius.circular(25),
+                                        bottomRight: Radius.circular(25)),
                                     color: Colors.white,
                                   ),
                                   constraints: BoxConstraints(
@@ -210,10 +225,8 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                                                   mainAxisSize:
                                                       MainAxisSize.min,
                                                   children: [
-                                                    Text(
-                                                      value,
-                                                      style: const TextStyle(
-                                                          fontSize: 16),
+                                                    normalText(
+                                                      value, notblack
                                                     ),
                                                     const SizedBox(width: 3),
                                                     const CircleAvatar(
@@ -266,6 +279,7 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                                 ),
                                 const SizedBox(height: 5),
                                 Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Container(
                                       height: 40,
@@ -299,13 +313,13 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                                             filled: true),
                                       ),
                                     ),
-                                    const SizedBox(width: 10.0),
+                                    const SizedBox(width: 5.0),
                                     spinText(":", 30.0),
                                     Container(
                                       height: 40,
-                                      width: 60,
+                                      width: 49,
                                       padding:
-                                          const EdgeInsets.only(left: 10.0),
+                                          const EdgeInsets.only(left: 5.0),
                                       child: const TextField(
                                         maxLines: 1,
                                         decoration: InputDecoration(
@@ -324,8 +338,8 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                                             filled: true),
                                       ),
                                     ),
-                                    const SizedBox(width: 10.0),
-                                    spinText("%", 25.0),
+                                    const SizedBox(width: 5.0),
+                                    spinText("%", 22.0),
                                     ElevatedButton(
                                       onPressed: () {
                                         if (choiceField.text.isEmpty) {
@@ -370,17 +384,18 @@ class _SpinBilndWheelState extends State<SpinBilndWheel> {
                           ],
                         ),
                       ),
+                      
                     ],
                   ),
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(bottom: 20.0, left: 20.0),
-                child: const Align(
-                  alignment: Alignment.bottomLeft,
-                  child: specialBackButton(),
-                ),
-              ),
+                        margin: const EdgeInsets.only(bottom: 20.0, left: 20.0),
+                        child:  Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Visibility(visible: !_keyboardVisible, child: specialBackButton())
+                        ),
+                      ),
             ],
           ),
         ),

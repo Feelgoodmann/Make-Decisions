@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       ),
       home: const MainMenu(),
       routes: {
-        '/':(context) => MainMenu(),
+        '/home':(context) => MainMenu(),
         '/setting':(context) => Setting(),
         '/randomNum':(context) => AutoRandom(),
         '/randomSpin':(context) => SpinBilndWheel(),

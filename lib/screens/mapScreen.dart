@@ -7,6 +7,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:make_decisions/resources/colors.dart';
+import 'package:make_decisions/screens/mainmenu.dart';
+
+import '../resources/foodInfo.dart';
 
 final _placesApiClient = GoogleMapsPlaces(apiKey: 'AIzaSyDprcfIeMnQP5qaRniFxsG0Uhy880aZA50');
 
@@ -69,7 +72,7 @@ class MapScreenState extends State<MapScreen>{
         backgroundColor: notgrey,
         foregroundColor: Colors.white,
         onPressed: () {
-          Navigator.pop(context);
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const FoodResInfo()));
         },
         child: const Icon(Icons.arrow_back_ios_rounded,),
         ),floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
